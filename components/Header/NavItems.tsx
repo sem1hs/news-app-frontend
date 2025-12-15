@@ -7,7 +7,7 @@ type Props = {
 
 const NavItems = ({ item }: Props) => {
   return (
-    <Link className="font-bold text-white" href={item.href}>
+    <Link className="font-bold text-white cursor-pointer" href={item.href}>
       {item.label}
     </Link>
   );

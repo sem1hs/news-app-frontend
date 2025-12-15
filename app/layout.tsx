@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "@/providers/Providers";
 import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
+import MobileHeader from "@/components/Header/MobileHeader";
 
 export const metadata: Metadata = {
   title: "News App Frontend",
@@ -18,7 +20,9 @@ export default function RootLayout({
       <body>
         <Providers>
           <Header />
-          {children}
+          <MobileHeader />
+          <main>{children}</main>
+          <Footer />
         </Providers>
       </body>
     </html>

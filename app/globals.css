@@ -1,13 +1,13 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 body {
   background-color: #0c0e0f;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
 }
 
 html {
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
   font-family: "Inter", sans-serif;
 }

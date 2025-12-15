@@ -23,10 +23,10 @@ const SearchBar = () => {
           name="searchQuery"
           type="text"
           placeholder="Arama Yapın"
-          className="w-full h-11 pl-11 pr-4 rounded-full border border-zinc-300 bg-transparent text-white placeholder:text-zinc-400 focus:outline-none transition"
+          className="w-[50%] md:w-full h-7 md:h-11 ml-auto pl-7 md:pl-11 pr-4 rounded-2xl md:rounded-full border border-zinc-300 bg-transparent placeholder:text-zinc-400 focus:outline-none transition text-white"
         />
         <button type="submit" className="flex items-center">
-          <Search className="absolute left-4 text-white w-5 h-5 cursor-pointer" />
+          <Search className="absolute left-25.5 md:left-4 text-white md:w-5 md:h-5 w-4 h-4 cursor-pointer" />
         </button>
       </Form>
     </Formik>
