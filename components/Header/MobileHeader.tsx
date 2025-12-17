@@ -2,6 +2,7 @@
 import { Menu, X } from "lucide-react";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
+import MobileNav from "./MobileNav";
 
 const MobileHeader = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -22,7 +23,7 @@ const MobileHeader = () => {
 
       <div
         className={`px-4 py-4 fixed top-0 left-0 h-full w-[280px] bg-[#111517] z-50
-          transform transition-transform duration-300
+          transform transition-transform duration-300 flex flex-col
           ${open ? "translate-x-0" : "-translate-x-full"}
         `}
       >
@@ -32,6 +33,7 @@ const MobileHeader = () => {
         >
           <X className="text-white" />
         </button>
+        <MobileNav />
       </div>
 
       <button
