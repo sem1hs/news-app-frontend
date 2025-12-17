@@ -2,7 +2,8 @@
 import { NavItem } from "@/constants/NAV_ITEMS";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import MobileNavAccordion from "./MobileNavAccordion";
 
 type Props = {
   mobileNavItem: NavItem;
@@ -11,10 +12,10 @@ type Props = {
 const MobileNavItems = ({ mobileNavItem }: Props) => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setOpen((open) => !open);
-  };
+  }, []);
 
   if (!mobileNavItem.hasDropdown) {
     return (
@@ -35,25 +36,15 @@ const MobileNavItems = ({ mobileNavItem }: Props) => {
           <i>{!open ? <ChevronDown /> : <ChevronUp />}</i>
         </button>
       </div>
-
       <div
-        className={`overflow-hidden transition-all duration-300 ${
+        className={`overflow-hidden transition-all duration-500 ${
           open ? "max-h-96" : "max-h-0"
         }`}
       >
-        <ul className="pl-4 pb-2 flex flex-col text-sm">
-          {mobileNavItem.dropdownItems?.map((item) => (
-            <li key={item.label}>
-              <Link
-                href={item.href}
-                className="block py-2 text-zinc-400 hover:text-white transition"
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <MobileNavAccordion
+          mobileNavItem={mobileNavItem}
+          handleClick={setOpen}
+        />
       </div>
     </div>
   );
