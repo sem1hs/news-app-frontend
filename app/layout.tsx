@@ -3,7 +3,7 @@ import "./globals.css";
 import Providers from "@/providers/Providers";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-import MobileHeader from "@/components/Header/MobileHeader";
+import MobileHeader from "@/components/Header/mobile/MobileHeader";
 
 export const metadata: Metadata = {
   title: "News App Frontend",

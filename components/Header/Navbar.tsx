@@ -4,7 +4,7 @@ import Dropdown from "./Dropdown";
 
 const Navbar = () => {
   return (
-    <nav className="flex-1 px-36">
+    <nav className="flex-1 px-12">
       <ul className="flex items-center justify-around">
         {NAV_ITEMS.map((item) => (
           <li key={item.href}>

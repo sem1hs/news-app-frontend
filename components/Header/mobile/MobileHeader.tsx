@@ -1,6 +1,6 @@
 "use client";
 import { Menu, X } from "lucide-react";
-import SearchBar from "./SearchBar";
+import SearchBar from "../SearchBar";
 import { useCallback, useState } from "react";
 import MobileNav from "./MobileNav";
 
