@@ -1,21 +1,26 @@
-"use client";
 import { NavItem } from "@/constants/NAV_ITEMS";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
-import { useCallback, useState } from "react";
 import MobileNavAccordion from "./MobileNavAccordion";
+import { useCallback } from "react";
 
 type Props = {
   mobileNavItem: NavItem;
+  openItem: string | null;
+  setOpenItem: (value: string | null) => void;
 };
 
-const MobileNavItems = ({ mobileNavItem }: Props) => {
-  const [open, setOpen] = useState<boolean>(false);
+const MobileNavItems = ({ mobileNavItem, openItem, setOpenItem }: Props) => {
+  const isOpen = openItem === mobileNavItem.label;
 
-  const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setOpen((open) => !open);
-  }, []);
+    setOpenItem(isOpen ? null : mobileNavItem.label);
+  };
+
+  const closeAccordion = useCallback(() => {
+    setOpenItem(null);
+  }, [setOpenItem]);
 
   if (!mobileNavItem.hasDropdown) {
     return (
@@ -33,17 +38,17 @@ const MobileNavItems = ({ mobileNavItem }: Props) => {
         </Link>
 
         <button className="" onClick={handleClick}>
-          <i>{!open ? <ChevronDown /> : <ChevronUp />}</i>
+          <i>{!isOpen ? <ChevronDown /> : <ChevronUp />}</i>
         </button>
       </div>
       <div
         className={`overflow-hidden transition-all duration-500 ${
-          open ? "max-h-96" : "max-h-0"
+          isOpen ? "max-h-96" : "max-h-0"
         }`}
       >
         <MobileNavAccordion
           mobileNavItem={mobileNavItem}
-          handleClick={setOpen}
+          handleClick={closeAccordion}
         />
       </div>
     </div>

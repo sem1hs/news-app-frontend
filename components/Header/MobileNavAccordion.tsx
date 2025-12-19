@@ -4,7 +4,7 @@ import { memo } from "react";
 
 type Props = {
   mobileNavItem: NavItem;
-  handleClick: (open: boolean) => void;
+  handleClick: () => void;
 };
 const MobileNavAccordion = ({ mobileNavItem, handleClick }: Props) => {
   return (
@@ -14,7 +14,7 @@ const MobileNavAccordion = ({ mobileNavItem, handleClick }: Props) => {
           <Link
             href={item.href}
             className="block py-2 text-zinc-400 hover:text-white transition"
-            onClick={() => handleClick(false)}
+            onClick={handleClick}
           >
             {item.label}
           </Link>

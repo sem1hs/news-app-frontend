@@ -1,16 +1,16 @@
 "use client";
 import { Menu, X } from "lucide-react";
 import SearchBar from "./SearchBar";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import MobileNav from "./MobileNav";
 
 const MobileHeader = () => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setOpen((open) => !open);
-  };
+  }, []);
 
   return (
     <header className="flex md:hidden px-4 py-4 bg-[#111517]">
