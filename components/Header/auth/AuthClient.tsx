@@ -20,10 +20,13 @@ const AuthClient = () => {
     [user]
   );
 
-  const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    await logout();
-    setMenuOpen(false);
-  };
+  const handleLogout = useCallback(
+    async (e: React.MouseEvent<HTMLButtonElement>) => {
+      await logout();
+      setMenuOpen(false);
+    },
+    [logout]
+  );
 
   const closeModal = useCallback(() => {
     setAuthOpen(false);
