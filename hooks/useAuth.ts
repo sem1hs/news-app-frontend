@@ -43,10 +43,20 @@ export const useAuth = () => {
     },
   });
 
+  const loginFn = async (payload: { user: SignUpRequest }) => {
+    const data = await loginMutation.mutateAsync(payload);
+    return data;
+  };
+
+  const signUpFn = async (payload: { user: LoginRequest }) => {
+    const data = await signUpMutation.mutateAsync(payload);
+    return data;
+  };
+
   return {
-    loginFn: loginMutation.mutateAsync,
+    loginFn,
+    signUpFn,
     logoutFn: logoutMutation.mutate,
-    signUpFn: signUpMutation.mutateAsync,
     user: loginMutation.data,
   };
 };

@@ -15,8 +15,12 @@ const LoginForm = ({ closeModal }: Props) => {
   const handleSubmit = async (values: LoginRequest) => {
     try {
       await loginFn({ user: values });
+      const user = await loginFn({ user: values });
+
+      if (user.role.some((role) => role === "ROLE_ADMIN")) {
+        router.push("/admin");
+      }
       closeModal();
-      router.push("/admin");
     } catch (err) {
       console.error(err);
     }
