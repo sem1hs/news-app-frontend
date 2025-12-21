@@ -1,15 +1,29 @@
+import { useAuth } from "@/context/authContext";
 import { useLogin } from "@/hooks/useLogin";
 import { loginInitialValues, loginSchema } from "@/schemas/loginSchema";
 import { LoginRequest } from "@/types/auth";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import { useRouter } from "next/navigation";
 
-const LoginForm = () => {
+type Props = {
+  closeModal: () => void;
+};
+
+const LoginForm = ({ closeModal }: Props) => {
+  const router = useRouter();
+  const { refetch } = useAuth();
   const { loginFn } = useLogin();
 
   const handleSubmit = async (values: LoginRequest) => {
-    console.log(values);
-    const tokens = await loginFn(values);
-    console.log(tokens);
+    const user = await loginFn(values);
+
+    if (user) {
+      await refetch();
+      closeModal();
+      if (user.role.some((role) => role === "ROLE_ADMIN")) {
+        router.push("/admin");
+      }
+    }
   };
 
   return (

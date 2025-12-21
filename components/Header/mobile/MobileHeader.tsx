@@ -3,6 +3,7 @@ import { Menu, X } from "lucide-react";
 import SearchBar from "../SearchBar";
 import { useCallback, useState } from "react";
 import MobileNav from "./MobileNav";
+import AuthClient from "../auth/AuthClient";
 
 const MobileHeader = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -13,7 +14,7 @@ const MobileHeader = () => {
   }, []);
 
   return (
-    <header className="flex md:hidden px-4 py-4 bg-[#111517]">
+    <header className="flex items-center md:hidden px-4 py-4 bg-[#111517] gap-4">
       <div
         onClick={() => setOpen(false)}
         className={`fixed inset-0 bg-black/50 transition-opacity duration-300 z-40 ${
@@ -43,6 +44,7 @@ const MobileHeader = () => {
         <Menu className="text-white" />
       </button>
       <h1 className="text-white text-xl font-bold ml-4">SemihScore</h1>
+      <AuthClient />
       <SearchBar />
     </header>
   );

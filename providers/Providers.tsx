@@ -1,5 +1,6 @@
 "use client";
 
+import { AuthProvider } from "@/context/authContext";
 import {
   QueryClient,
   QueryClientProvider,
@@ -36,7 +37,9 @@ export function getQueryClient() {
 const Providers = ({ children }: { children: React.ReactNode }) => {
   const queryClient = getQueryClient();
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>{children}</AuthProvider>
+    </QueryClientProvider>
   );
 };
 

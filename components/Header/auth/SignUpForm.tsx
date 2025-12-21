@@ -1,10 +1,29 @@
+import { useAuth } from "@/context/authContext";
+import { useSignUp } from "@/hooks/useSignUp";
 import { signUpInitialValues, signUpSchema } from "@/schemas/signUpSchema";
 import { SignUpRequest } from "@/types/auth";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import { useRouter } from "next/navigation";
 
-const SignUpForm = () => {
-  const handleSubmit = (values: SignUpRequest) => {
-    console.log(values);
+type Props = {
+  closeModal: () => void;
+};
+
+const SignUpForm = ({ closeModal }: Props) => {
+  const router = useRouter();
+  const { refetch } = useAuth();
+  const { signUpFn } = useSignUp();
+
+  const handleSubmit = async (values: SignUpRequest) => {
+    const user = await signUpFn(values);
+
+    if (user) {
+      await refetch();
+      closeModal();
+      if (user.role.some((role) => role === "ROLE_ADMIN")) {
+        router.push("/admin");
+      }
+    }
   };
 
   return (
@@ -48,7 +67,7 @@ const SignUpForm = () => {
             disabled={isSubmitting}
             className="cursor-pointer mt-2 rounded-lg bg-amber-500 py-2.5 font-semibold text-[#1a1f26] hover:bg-amber-400 transition disabled:opacity-60"
           >
-            {isSubmitting ? "Giriş yapılıyor..." : "Oturum Aç"}
+            {isSubmitting ? "Kayıt Olunuyor..." : "Kayıt Ol"}
           </button>
         </Form>
       )}

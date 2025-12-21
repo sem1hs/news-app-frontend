@@ -3,13 +3,15 @@ import { X } from "lucide-react";
 import LoginForm from "./LoginForm";
 import { useState } from "react";
 import SignUpForm from "./SignUpForm";
+import AuthButton from "./AuthButton";
+import { AuthLoginButton, AuthSignUpButton } from "@/constants/AUTH_BUTTON";
 
 type Props = {
   open: boolean;
   onClose: () => void;
 };
 
-type AuthView = "login" | "register";
+export type AuthView = "login" | "register";
 
 const AuthModal = ({ open, onClose }: Props) => {
   const [view, setView] = useState<AuthView>("login");
@@ -30,28 +32,16 @@ const AuthModal = ({ open, onClose }: Props) => {
             <X />
           </button>
         </div>
-        {view === "login" ? <LoginForm /> : <SignUpForm />}
+        {view === "login" ? (
+          <LoginForm closeModal={onClose} />
+        ) : (
+          <SignUpForm closeModal={onClose} />
+        )}
 
         {view === "login" ? (
-          <div className="text-amber-600 text-sm mt-3 flex gap-1">
-            <span>Hesabınız yok mu?</span>
-            <button
-              onClick={() => setView("register")}
-              className="hover:underline"
-            >
-              Kayıt olun
-            </button>
-          </div>
+          <AuthButton authButtonType={AuthSignUpButton} setView={setView} />
         ) : (
-          <div className="text-amber-600 text-sm mt-3 flex gap-1">
-            <span>Hesabınız varsa</span>
-            <button
-              onClick={() => setView("login")}
-              className="hover:underline"
-            >
-              Oturum açın
-            </button>
-          </div>
+          <AuthButton authButtonType={AuthLoginButton} setView={setView} />
         )}
       </div>
     </div>
