@@ -1,5 +1,4 @@
-import { useAuth } from "@/context/authContext";
-import { useSignUp } from "@/hooks/useSignUp";
+import { useAuth } from "@/hooks/useAuth";
 import { signUpInitialValues, signUpSchema } from "@/schemas/signUpSchema";
 import { SignUpRequest } from "@/types/auth";
 import { ErrorMessage, Field, Form, Formik } from "formik";
@@ -11,18 +10,15 @@ type Props = {
 
 const SignUpForm = ({ closeModal }: Props) => {
   const router = useRouter();
-  const { refetch } = useAuth();
-  const { signUpFn } = useSignUp();
+  const { signUpFn } = useAuth();
 
   const handleSubmit = async (values: SignUpRequest) => {
-    const user = await signUpFn(values);
-
-    if (user) {
-      await refetch();
+    try {
+      await signUpFn({ user: values });
       closeModal();
-      if (user.role.some((role) => role === "ROLE_ADMIN")) {
-        router.push("/admin");
-      }
+      router.push("/admin");
+    } catch (err) {
+      console.error(err);
     }
   };
 

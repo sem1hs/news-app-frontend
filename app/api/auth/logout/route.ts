@@ -18,7 +18,6 @@ export async function POST() {
 
   cookieStore.delete("accessToken");
   cookieStore.delete("refreshToken");
-  console.log(response);
 
   return NextResponse.json({ success: true });
 }

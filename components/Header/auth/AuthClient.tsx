@@ -3,29 +3,33 @@
 import { CircleUser, LogOut } from "lucide-react";
 import React, { useCallback, useState } from "react";
 import AuthModal from "./AuthModal";
-import { useAuth } from "@/context/authContext";
+import { useUser } from "@/hooks/useUser";
+import { useAuth } from "@/hooks/useAuth";
 
 const AuthClient = () => {
-  const { user, logout } = useAuth();
+  const { logoutFn } = useAuth();
+  const { user } = useUser();
   const [authOpen, setAuthOpen] = useState<boolean>(false);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+
+  const isAuthenticated = !!user;
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
 
-      if (!user) setAuthOpen(true);
+      if (!isAuthenticated) setAuthOpen(true);
       else setMenuOpen((prev) => !prev);
     },
-    [user]
+    [isAuthenticated]
   );
 
   const handleLogout = useCallback(
     async (e: React.MouseEvent<HTMLButtonElement>) => {
-      await logout();
+      logoutFn();
       setMenuOpen(false);
     },
-    [logout]
+    [logoutFn]
   );
 
   const closeModal = useCallback(() => {
@@ -40,11 +44,11 @@ const AuthClient = () => {
       >
         <CircleUser className="w-[18px] md:w-[24px]" />
         <span className="hidden md:block">
-          {user === null ? " Oturum Aç / Kayıt Ol" : user.username}
+          {!isAuthenticated ? " Oturum Aç / Kayıt Ol" : user?.username}
         </span>
       </button>
 
-      {user && menuOpen && (
+      {isAuthenticated && menuOpen && (
         <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-40 rounded-xl bg-[#111517] shadow-lg border border-zinc-800 z-50">
           <button
             onClick={handleLogout}
@@ -56,7 +60,9 @@ const AuthClient = () => {
         </div>
       )}
 
-      {authOpen && !user && <AuthModal open={authOpen} onClose={closeModal} />}
+      {authOpen && !isAuthenticated && (
+        <AuthModal open={authOpen} onClose={closeModal} />
+      )}
     </div>
   );
 };

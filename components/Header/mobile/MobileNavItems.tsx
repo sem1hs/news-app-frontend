@@ -13,10 +13,13 @@ type Props = {
 const MobileNavItems = ({ mobileNavItem, openItem, setOpenItem }: Props) => {
   const isOpen = openItem === mobileNavItem.label;
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setOpenItem(isOpen ? null : mobileNavItem.label);
-  };
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      setOpenItem(isOpen ? null : mobileNavItem.label);
+    },
+    [setOpenItem, isOpen, mobileNavItem.label]
+  );
 
   const closeAccordion = useCallback(() => {
     setOpenItem(null);

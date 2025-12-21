@@ -15,6 +15,13 @@ export async function POST(req: Request) {
 
   const tokens = await res.json();
 
+  if (tokens.error) {
+    return NextResponse.json(
+      { message: "Tokenlar Çekilemedi" },
+      { status: 403 }
+    );
+  }
+
   const cookieStore = await cookies();
 
   cookieStore.set("accessToken", tokens.accessToken, {
