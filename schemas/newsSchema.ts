@@ -21,6 +21,18 @@ export const newsSchema = Yup.object({
   imageUrl: Yup.string().required("Görsel URL zorunlu"),
 });
 
+export const newsUpdateSchema = Yup.object({
+  title: Yup.string().required("Başlık zorunlu").optional(),
+  slug: Yup.string()
+    .matches(/^[a-z0-9-]+$/, "Slug sadece küçük harf ve - içermeli")
+    .optional(),
+  spot: Yup.string().optional(),
+  content: Yup.string().optional(),
+  category: Yup.string().optional(),
+  subCategory: Yup.string().optional(),
+  imageUrl: Yup.string().optional(),
+});
+
 export const newsInitialValues: NewsCreateRequest = {
   title: "",
   slug: "",

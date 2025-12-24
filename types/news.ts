@@ -6,7 +6,7 @@ export interface NewsResponse {
   spot: string;
   category: string;
   subCategory: string;
-  tags: string[];
+  tags: string[] | string;
   imageUrl: string;
   views: number;
   createdBy: string;
@@ -22,5 +22,18 @@ export interface NewsCreateRequest {
   subCategory: string;
   tags: string[] | string;
   imageUrl: string;
+  views?: number;
+}
+
+export interface UpdateNewsRequest {
+  id: number;
+  title?: string;
+  slug?: string;
+  content?: string;
+  spot?: string;
+  category?: string;
+  subCategory?: string;
+  tags?: string[] | string;
+  imageUrl?: string;
   views?: number;
 }

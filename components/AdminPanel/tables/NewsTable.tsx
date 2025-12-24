@@ -2,15 +2,27 @@
 
 import { useNews } from "@/hooks/useNews";
 import { NewsResponse } from "@/types/news";
+import { useCallback, useState } from "react";
+import UpdateNewsModal from "../modal/UpdateNewsModal";
 
 export default function NewsTable({ data }: { data: NewsResponse[] }) {
   const { deleteNews } = useNews();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedNews, setSelectedNews] = useState<NewsResponse | null>(null);
 
-  const handleDelete = (newsId: number) => {
-    const confirmed = confirm("Bu haberi silmek istiyor musunuz?");
-    if (!confirmed) return;
-    deleteNews(newsId);
-  };
+  const handleDelete = useCallback(
+    (newsId: number) => {
+      const confirmed = confirm("Bu haberi silmek istiyor musunuz?");
+      if (!confirmed) return;
+      deleteNews(newsId);
+    },
+    [deleteNews]
+  );
+
+  const handleUpdate = useCallback((news: NewsResponse) => {
+    setSelectedNews(news);
+    setIsModalOpen(true);
+  }, []);
 
   return (
     <div className="overflow-x-auto px-6 mt-6 custom-scrollbar">
@@ -93,7 +105,10 @@ export default function NewsTable({ data }: { data: NewsResponse[] }) {
 
               <td className="p-2 border border-amber-500 text-center">
                 <div className="flex gap-2 justify-center">
-                  <button className="cursor-pointer rounded bg-amber-500 px-3 py-1 text-xs font-semibold text-black hover:bg-amber-400 transition">
+                  <button
+                    onClick={() => handleUpdate(news)}
+                    className="cursor-pointer rounded bg-amber-500 px-3 py-1 text-xs font-semibold text-black hover:bg-amber-400 transition"
+                  >
                     Düzenle
                   </button>
 
@@ -109,6 +124,13 @@ export default function NewsTable({ data }: { data: NewsResponse[] }) {
           ))}
         </tbody>
       </table>
+
+      {isModalOpen && selectedNews && (
+        <UpdateNewsModal
+          news={selectedNews}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   );
 }

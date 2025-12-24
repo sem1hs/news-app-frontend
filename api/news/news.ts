@@ -1,4 +1,8 @@
-import { NewsCreateRequest, NewsResponse } from "@/types/news";
+import {
+  NewsCreateRequest,
+  NewsResponse,
+  UpdateNewsRequest,
+} from "@/types/news";
 import { Page } from "@/types/pageable";
 
 export async function fetchNews(): Promise<Page<NewsResponse>> {
@@ -19,6 +23,22 @@ export async function createNews(
 ): Promise<NewsResponse> {
   const res = await fetch("/api/news", {
     method: "POST",
+    credentials: "include",
+    body: JSON.stringify(news),
+  });
+
+  if (!res.ok) {
+    throw new Error("Haberler Oluşturulamadı");
+  }
+
+  return res.json();
+}
+
+export async function updateNews(
+  news: UpdateNewsRequest
+): Promise<NewsResponse> {
+  const res = await fetch(`/api/news/${news.id}`, {
+    method: "PATCH",
     credentials: "include",
     body: JSON.stringify(news),
   });

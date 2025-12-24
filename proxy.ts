@@ -22,6 +22,12 @@ export function proxy(request: NextRequest) {
       const baseUrl = new URL("/", request.url);
       return NextResponse.redirect(baseUrl);
     }
+
+    const decoded = verifyJwt(token);
+    if (!decoded?.roles.some((role) => role === "ROLE_ADMIN")) {
+      const baseUrl = new URL("/", request.url);
+      return NextResponse.redirect(baseUrl);
+    }
   }
 
   return NextResponse.next();

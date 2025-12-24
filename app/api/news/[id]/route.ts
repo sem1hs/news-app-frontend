@@ -34,3 +34,34 @@ export async function DELETE(
 
   return Response.json({});
 }
+
+export async function PATCH(
+  request: Request,
+  { params }: { params: Promise<Params> }
+) {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("accessToken")?.value;
+
+  if (!token) {
+    return new Response("Token Bulunamadı", { status: 401 });
+  }
+
+  const { id } = await params;
+  const body = await request.json();
+
+  const res = await fetch(`${BASE_URL}/news/${id}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    return new Response("Haberler silinemedi", { status: 500 });
+  }
+
+  return Response.json({});
+}

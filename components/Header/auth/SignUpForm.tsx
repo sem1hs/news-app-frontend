@@ -17,7 +17,7 @@ const SignUpForm = ({ closeModal }: Props) => {
       await signUpFn({ user: values });
       const user = await signUpFn({ user: values });
 
-      if (user.role.some((role) => role === "ROLE_ADMIN")) {
+      if (user.role.some((role: string) => role === "ROLE_ADMIN")) {
         router.push("/admin");
       }
       closeModal();

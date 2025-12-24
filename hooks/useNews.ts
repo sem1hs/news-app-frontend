@@ -1,7 +1,7 @@
 "use client";
 
-import { createNews, deleteNews, fetchNews } from "@/api/news/news";
-import { NewsResponse, NewsCreateRequest } from "@/types/news";
+import { createNews, deleteNews, fetchNews, updateNews } from "@/api/news/news";
+import { NewsCreateRequest, UpdateNewsRequest } from "@/types/news";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useNews = () => {
@@ -28,6 +28,15 @@ export const useNews = () => {
     },
   });
 
+  const updateNewsMutation = useMutation({
+    mutationFn: async ({ news }: { news: UpdateNewsRequest }) =>
+      await updateNews(news),
+
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["news"] });
+    },
+  });
+
   const deleteNewsMutation = useMutation({
     mutationFn: async (id: number) => await deleteNews(id),
 
@@ -37,6 +46,7 @@ export const useNews = () => {
   });
 
   return {
+    updateNews: updateNewsMutation.mutate,
     createNews: createNewsMutation.mutate,
     deleteNews: deleteNewsMutation.mutate,
     getAllNews,
