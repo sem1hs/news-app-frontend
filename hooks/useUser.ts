@@ -12,5 +12,5 @@ export function useUser() {
 
   const user = getUser.data?.user ?? null;
 
-  return { user, status: getUser.status };
+  return { user, loading: getUser.isLoading, status: getUser.status };
 }

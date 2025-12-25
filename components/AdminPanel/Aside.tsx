@@ -14,7 +14,8 @@ const Aside = () => {
       shrink-0
       transition-[width] duration-300 ease-in-out
       will-change-[width]
-      ${isOpen ? "w-64 min-w-64" : "w-16 min-w-16"}
+      border-r border-white/10
+      ${isOpen ? "w-32 min-w-32 md:w-64 md:min-w-64" : "w-16 min-w-16"}
     `}
     >
       <button
@@ -26,7 +27,7 @@ const Aside = () => {
 
       <div className="py-8 px-4">
         {isOpen && (
-          <h2 className="text-2xl font-semibold mb-6 whitespace-nowrap">
+          <h2 className="text-sm md:text-2xl font-semibold mb-6 whitespace-nowrap">
             Admin Panel
           </h2>
         )}

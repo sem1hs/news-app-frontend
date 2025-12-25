@@ -5,6 +5,7 @@ import React, { useCallback, useState } from "react";
 import AuthModal from "./AuthModal";
 import { useUser } from "@/hooks/useUser";
 import { useAuth } from "@/hooks/useAuth";
+import Link from "next/link";
 
 const AuthClient = () => {
   const { logoutFn } = useAuth();
@@ -13,6 +14,7 @@ const AuthClient = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   const isAuthenticated = !!user;
+  const isAdmin = !!user?.role?.some((r: string) => r === "ROLE_ADMIN");
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -52,11 +54,16 @@ const AuthClient = () => {
         <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-40 rounded-xl bg-[#111517] shadow-lg border border-zinc-800 z-50">
           <button
             onClick={handleLogout}
-            className="cursor-pointer flex w-full items-center gap-2 px-4 py-2 text-sm text-red-400 hover:bg-[#272C33] rounded-xl"
+            className="cursor-pointer flex w-full items-center gap-2 px-4 py-2 text-sm text-red-400 hover:bg-[#272C33]"
           >
             <LogOut className="w-4 h-4" />
             Çıkış Yap
           </button>
+          {isAdmin && (
+            <button className="cursor-pointer flex w-full items-center gap-2 px-4 py-2 text-sm text-white hover:bg-[#272C33]">
+              <Link href="/admin">Admin Panel</Link>
+            </button>
+          )}
         </div>
       )}
 

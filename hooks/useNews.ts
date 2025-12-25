@@ -49,7 +49,7 @@ export const useNews = () => {
     updateNews: updateNewsMutation.mutate,
     createNews: createNewsMutation.mutate,
     deleteNews: deleteNewsMutation.mutate,
-    getAllNews,
+    news: getAllNews.data,
     isLoading: getAllNews.isLoading,
   };
 };

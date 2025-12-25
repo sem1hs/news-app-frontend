@@ -13,7 +13,7 @@ const MobileNavAccordion = ({ navLinks, handleClick }: Props) => {
         <li key={item.label}>
           <Link
             href={item.href}
-            className="block py-2 px-1.5 text-lg text-zinc-300 hover:bg-[#1e2529] transition"
+            className="block py-2 px-1.5 text-xs md:text-lg text-zinc-300 hover:bg-[#1e2529] transition"
             onClick={handleClick}
           >
             {item.label}

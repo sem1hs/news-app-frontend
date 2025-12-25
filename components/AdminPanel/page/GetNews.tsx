@@ -4,7 +4,7 @@ import NewsTable from "../tables/NewsTable";
 import { useNews } from "@/hooks/useNews";
 
 const GetNews = () => {
-  const { getAllNews, isLoading } = useNews();
+  const { news, isLoading } = useNews();
   const [visible, setVisible] = useState<boolean>(false);
 
   const handleClick = useCallback(
@@ -24,9 +24,7 @@ const GetNews = () => {
         {isLoading ? "Yükleniyor..." : "Haberleri Getir"}
       </button>
 
-      {visible && getAllNews.data && (
-        <NewsTable data={getAllNews.data?.content} />
-      )}
+      {visible && news && <NewsTable data={news?.content} />}
     </>
   );
 };

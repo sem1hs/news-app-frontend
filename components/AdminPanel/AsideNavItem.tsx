@@ -27,7 +27,7 @@ const AsideNavItem = ({ navItem, openItem, setOpenItem }: Props) => {
     <li>
       <div className="text-white cursor-pointer">
         <button className="flex items-center gap-2 mb-2" onClick={handleClick}>
-          <h1 className="font-bold text-xl">{navItem.label}</h1>
+          <h1 className="md:font-bold text-sm md:text-xl">{navItem.label}</h1>
           <i>{!isOpen ? <ChevronDown /> : <ChevronUp />}</i>
         </button>
 
