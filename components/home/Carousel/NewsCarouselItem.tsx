@@ -19,14 +19,15 @@ export default function NewsCarouselItem({
   return (
     <Link
       href={`/haber/${slug}`}
-      className="relative block h-[420px] w-full overflow-hidden rounded-xl"
+      className="relative block h-[260px] sm:h-[320px] md:h-[420px] w-full overflow-hidden rounded-xl"
     >
       <Image
         src={imageUrl}
         alt={title}
         fill
-        className="object-cover"
         priority
+        className="object-cover object-center"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1200px"
       />
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />

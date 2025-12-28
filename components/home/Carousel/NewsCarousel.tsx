@@ -20,7 +20,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 export default function NewsCarousel() {
   const { news, isLoading } = useNews();
 
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
   const autoplay = useRef(
@@ -61,9 +61,9 @@ export default function NewsCarousel() {
   }, [emblaApi]);
 
   return (
-    <section className="relative w-full py-8 md:py-16">
+    <section className="relative w-full py-8 md:py-16 overflow-hidden">
       <div
-        className="relative px-4 md:px-32"
+        className="container relative mx-auto px-4 overflow-hidden"
         onMouseEnter={() => autoplay.current.stop()}
         onMouseLeave={() => autoplay.current.play()}
       >
@@ -94,30 +94,28 @@ export default function NewsCarousel() {
 
         <button
           onClick={scrollPrev}
-          className="cursor-pointer absolute left-5 md:left-20 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white hover:bg-black transition"
+          className="absolute left-5 md:left-10 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-1.5 md:p-2 text-white hover:bg-black transition"
         >
-          <ChevronLeft />
+          <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
         </button>
 
         <button
           onClick={scrollNext}
-          className="cursor-pointer absolute right-5 md:right-20 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white hover:bg-black transition"
+          className="absolute right-5 md:right-10 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-1.5 md:p-2 text-white hover:bg-black transition"
         >
-          <ChevronRight />
+          <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
         </button>
-        <div className="mt-4 flex justify-center gap-2">
+
+        <div className="mt-3 md:mt-4 flex justify-center gap-2">
           {scrollSnaps.map((_, index) => (
             <button
               key={index}
               onClick={() => scrollTo(index)}
-              className={`
-                cursor-pointer h-2.5 w-2.5 rounded-full transition
-                ${
-                  index === selectedIndex
-                    ? "bg-amber-500 scale-110"
-                    : "bg-white/40 hover:bg-white/70"
-                }
-              `}
+              className={`h-2.5 w-2.5 rounded-full transition ${
+                index === selectedIndex
+                  ? "bg-amber-500 scale-110"
+                  : "bg-white/40 hover:bg-white/70"
+              }`}
               aria-label={`Slide ${index + 1}`}
             />
           ))}

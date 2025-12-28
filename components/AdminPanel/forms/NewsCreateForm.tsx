@@ -26,7 +26,7 @@ export default function CreateNewsForm() {
   };
 
   return (
-    <div className="overflow-x-auto px-6 mt-6 w-full">
+    <div className=" px-6 mt-6 w-full">
       <Formik
         initialValues={newsInitialValues}
         validationSchema={newsSchema}

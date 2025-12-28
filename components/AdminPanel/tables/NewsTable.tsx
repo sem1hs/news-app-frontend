@@ -27,7 +27,7 @@ export default function NewsTable({ data }: { data: NewsResponse[] }) {
   return (
     <div className="mt-6 px-6">
       <div className="overflow-x-auto custom-scrollbar max-w-full">
-        <table className="bg-[#111517] text-sm text-white">
+        <table className="bg-[#111517] text-sm text-white mx-auto">
           <thead className="bg-amber-500 text-black">
             <tr>
               <th className="p-2 border">ID</th>

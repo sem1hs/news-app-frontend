@@ -9,7 +9,6 @@ export async function GET() {
       "Content-Type": "application/json",
     },
   });
-
   if (!res.ok) {
     return new Response("Haberler getirilemedi", { status: 500 });
   }

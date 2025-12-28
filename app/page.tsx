@@ -2,6 +2,8 @@ import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import MobileHeader from "@/components/Header/mobile/MobileHeader";
 import NewsCarousel from "@/components/home/Carousel/NewsCarousel";
+import LatestNews from "@/components/home/LatestNews/LatestNews";
+import PopularNews from "@/components/home/PopulerNews/PopularNews";
 
 const Page = () => {
   return (
@@ -10,7 +12,8 @@ const Page = () => {
       <MobileHeader />
       <main>
         <NewsCarousel />
-        {/* diğer bölümler */}
+        <PopularNews />
+        <LatestNews />
       </main>
       <Footer />
     </>
