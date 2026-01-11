@@ -5,12 +5,13 @@ export interface NewsResponse {
   content: string;
   spot: string;
   category: string;
-  subCategory: string;
   tags: string[] | string;
   imageUrl: string;
   views: number;
   createdBy: string;
   createdDate: string;
+  leagueName: string;
+  teamName: string;
 }
 
 export interface NewsCreateRequest {
@@ -19,7 +20,8 @@ export interface NewsCreateRequest {
   content: string;
   spot: string;
   category: string;
-  subCategory: string;
+  leagueId: number;
+  teamId: number;
   tags: string[] | string;
   imageUrl: string;
   views?: number;
@@ -32,7 +34,8 @@ export interface UpdateNewsRequest {
   content?: string;
   spot?: string;
   category?: string;
-  subCategory?: string;
+  leagueId?: number;
+  teamId?: number;
   tags?: string[] | string;
   imageUrl?: string;
   views?: number;

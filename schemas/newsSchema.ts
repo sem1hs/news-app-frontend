@@ -14,7 +14,8 @@ export const newsSchema = Yup.object({
 
   category: Yup.string().required("Kategori seçilmeli"),
 
-  subCategory: Yup.string().required("Alt kategori zorunlu"),
+  leagueId: Yup.number().required("Lig seçilmeli"),
+  teamId: Yup.number().required("Takım seçilmeli"),
 
   tags: Yup.string().required("En az bir etiket girilmeli"),
 
@@ -29,7 +30,8 @@ export const newsUpdateSchema = Yup.object({
   spot: Yup.string().optional(),
   content: Yup.string().optional(),
   category: Yup.string().optional(),
-  subCategory: Yup.string().optional(),
+  leagueId: Yup.number().optional(),
+  teamId: Yup.number().optional(),
   imageUrl: Yup.string().optional(),
 });
 
@@ -39,7 +41,8 @@ export const newsInitialValues: NewsCreateRequest = {
   content: "",
   spot: "",
   category: "",
-  subCategory: "",
+  leagueId: 0,
+  teamId: 0,
   tags: [""],
   imageUrl: "",
 };

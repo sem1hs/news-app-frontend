@@ -16,7 +16,7 @@ export default function UpdateNewsModal({ news, onClose }: Props) {
           <h2 className="text-lg font-semibold">Haberi Güncelle</h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-white text-xl"
+            className="text-gray-400 hover:text-white text-xl cursor-pointer"
           >
             ✕
           </button>

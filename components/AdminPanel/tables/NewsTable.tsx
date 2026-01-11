@@ -33,7 +33,8 @@ export default function NewsTable({ data }: { data: NewsResponse[] }) {
               <th className="p-2 border">ID</th>
               <th className="p-2 border">Başlık</th>
               <th className="p-2 border">Kategori</th>
-              <th className="p-2 border">Alt Kategori</th>
+              <th className="p-2 border">Lig</th>
+              <th className="p-2 border">Takım</th>
               <th className="p-2 border">Slug</th>
               <th className="p-2 border">Spot</th>
               <th className="p-2 border">İçerik</th>
@@ -62,7 +63,11 @@ export default function NewsTable({ data }: { data: NewsResponse[] }) {
                 </td>
 
                 <td className="p-2 border border-amber-500 text-center">
-                  {news.subCategory}
+                  {news.leagueName}
+                </td>
+
+                <td className="p-2 border border-amber-500 text-center">
+                  {news.teamName}
                 </td>
 
                 <td className="p-2 border border-amber-500 text-center">
@@ -81,14 +86,20 @@ export default function NewsTable({ data }: { data: NewsResponse[] }) {
 
                 <td className="p-2 border border-amber-500">
                   <div className="flex flex-wrap gap-1">
-                    {news.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="rounded bg-amber-500 text-black px-2 py-0.5 text-xs"
-                      >
-                        {tag}
+                    {Array.isArray(news.tags) ? (
+                      news.tags.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="rounded bg-amber-500 text-black px-2 py-0.5 text-xs"
+                        >
+                          {tag}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="rounded bg-amber-500 text-black px-2 py-0.5 text-xs">
+                        {news.tags}
                       </span>
-                    ))}
+                    )}
                   </div>
                 </td>
 
