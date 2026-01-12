@@ -3,7 +3,7 @@ import Header from "@/components/Header/Header";
 import MobileHeader from "@/components/Header/mobile/MobileHeader";
 import NewsCarousel from "@/components/home/Carousel/NewsCarousel";
 import LatestNews from "@/components/home/LatestNews/LatestNews";
-import PopularNews from "@/components/home/PopulerNews/PopularNews";
+import PopularNews from "@/components/home/PopularNews/PopularNews";
 
 const Page = () => {
   return (

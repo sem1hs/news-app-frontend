@@ -18,6 +18,19 @@ export async function fetchNews(): Promise<Page<NewsResponse>> {
   return res.json();
 }
 
+export async function fetchNewsBySlug(slug: string): Promise<NewsResponse> {
+  const res = await fetch(`/api/news/slug/${slug}`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw new Error("Haberler getirilemedi");
+  }
+
+  return res.json();
+}
+
 export async function createNews(
   news: NewsCreateRequest
 ): Promise<NewsResponse> {

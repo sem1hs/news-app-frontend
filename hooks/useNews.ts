@@ -1,15 +1,28 @@
 "use client";
 
-import { createNews, deleteNews, fetchNews, updateNews } from "@/api/news/news";
+import {
+  createNews,
+  deleteNews,
+  fetchNews,
+  fetchNewsBySlug,
+  updateNews,
+} from "@/api/news/news";
 import { NewsCreateRequest, UpdateNewsRequest } from "@/types/news";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const useNews = () => {
+export const useNews = (slug?: string) => {
   const queryClient = useQueryClient();
 
   const getAllNews = useQuery({
     queryKey: ["news"],
     queryFn: fetchNews,
+    staleTime: 1000 * 60 * 10,
+  });
+
+  const getBySlug = useQuery({
+    queryKey: ["team", "slug", slug],
+    queryFn: () => fetchNewsBySlug(slug as string),
+    enabled: !!slug,
     staleTime: 1000 * 60 * 10,
   });
 
@@ -50,6 +63,8 @@ export const useNews = () => {
     createNews: createNewsMutation.mutate,
     deleteNews: deleteNewsMutation.mutate,
     news: getAllNews.data,
+    newsBySlug: getBySlug.data,
+    newsBySlugLoading: getBySlug.isLoading,
     isLoading: getAllNews.isLoading,
   };
 };

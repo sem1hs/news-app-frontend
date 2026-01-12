@@ -18,7 +18,7 @@ export default function NewsCarouselItem({
 }: Props) {
   return (
     <Link
-      href={`/haber/${slug}`}
+      href={`/news/${slug}`}
       className="relative block h-[260px] sm:h-[320px] md:h-[420px] w-full overflow-hidden rounded-xl"
     >
       <Image
