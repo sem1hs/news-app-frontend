@@ -17,12 +17,12 @@ export const NAV_ITEMS: NavItem[] = [
     href: "/news",
     hasDropdown: true,
     dropdownItems: [
-      { label: "Süper Lig", href: "/" },
-      { label: "Premier League", href: "/" },
-      { label: "Serie A", href: "/" },
-      { label: "La Liga", href: "/" },
-      { label: "Bundesliga", href: "/" },
-      { label: "Ligue 1", href: "/" },
+      { label: "Süper Lig", href: "/news" },
+      { label: "Premier League", href: "/news" },
+      { label: "Serie A", href: "/news" },
+      { label: "La Liga", href: "/news" },
+      { label: "Bundesliga", href: "/news" },
+      { label: "Ligue 1", href: "/news" },
     ],
   },
   {

@@ -40,3 +40,9 @@ export interface UpdateNewsRequest {
   imageUrl?: string;
   views?: number;
 }
+
+export type FetchNewsParams = {
+  leagueName?: string;
+  page?: number;
+  size?: number;
+};

@@ -1,4 +1,5 @@
 import {
+  FetchNewsParams,
   NewsCreateRequest,
   NewsResponse,
   UpdateNewsRequest,
@@ -20,6 +21,29 @@ export async function fetchNews(): Promise<Page<NewsResponse>> {
 
 export async function fetchNewsBySlug(slug: string): Promise<NewsResponse> {
   const res = await fetch(`/api/news/slug/${slug}`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw new Error("Haberler getirilemedi");
+  }
+
+  return res.json();
+}
+
+export async function fetchNewsByLeagueName({
+  leagueName,
+  page = 0,
+  size = 16,
+}: FetchNewsParams): Promise<Page<NewsResponse>> {
+  const params = new URLSearchParams();
+
+  if (leagueName) params.append("leagueName", leagueName);
+  params.append("page", page.toString());
+  params.append("size", size.toString());
+
+  const res = await fetch(`/api/news?${params.toString()}`, {
     method: "GET",
     credentials: "include",
   });

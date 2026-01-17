@@ -39,7 +39,7 @@ export default function PopularNewsCard({
             </span>
             {viewCount !== undefined && (
               <span className="ml-auto block text-xs text-muted-foreground flex items-center gap-1">
-                <Eye width={16} /> {viewCount.toLocaleString()}
+                <Eye width={16} /> {viewCount.toLocaleString("tr-TR")}
               </span>
             )}
           </div>

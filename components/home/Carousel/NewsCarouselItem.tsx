@@ -19,14 +19,14 @@ export default function NewsCarouselItem({
   return (
     <Link
       href={`/news/${slug}`}
-      className="relative block h-[260px] sm:h-[320px] md:h-[420px] w-full overflow-hidden rounded-xl"
+      className="group relative block h-[260px] sm:h-[320px] md:h-[420px] w-full overflow-hidden rounded-xl"
     >
       <Image
         src={imageUrl}
         alt={title}
         fill
         priority
-        className="object-cover object-center"
+        className="object-cover object-[50%_30%] transition-transform duration-700 group-hover:scale-105"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1200px"
       />
 
