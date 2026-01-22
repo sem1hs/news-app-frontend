@@ -30,12 +30,12 @@ export const NAV_ITEMS: NavItem[] = [
     href: "/fixtures",
     hasDropdown: true,
     dropdownItems: [
-      { label: "Süper Lig", href: "/" },
-      { label: "Premier League", href: "/" },
-      { label: "Serie A", href: "/" },
-      { label: "La Liga", href: "/" },
-      { label: "Bundesliga", href: "/" },
-      { label: "Ligue 1", href: "/" },
+      { label: "Süper Lig", href: "/fixtures" },
+      { label: "Premier League", href: "/fixtures" },
+      { label: "Serie A", href: "/fixtures" },
+      { label: "La Liga", href: "/fixtures" },
+      { label: "Bundesliga", href: "/fixtures" },
+      { label: "Ligue 1", href: "/fixtures" },
     ],
   },
   {

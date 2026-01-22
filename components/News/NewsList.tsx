@@ -3,12 +3,14 @@ import { useNews } from '@/hooks/useNews';
 import PopularNewsCard from '../home/PopularNews/PopularNewsCard'
 import NewsSkeleton from './NewsSkeleton';
 import NotFound from '../NotFound/NotFound';
+import useNewsByLeagueName from '@/hooks/useNewsByLeagueName';
 
 type Props = {
     leagueName?: string | string[];
 }
 const NewsList = ({ leagueName }: Props) => {
-    const { news, newsByLeagueName, isLoading, newsByLeagueNameLoading, } = useNews({ leagueName });
+    const { news: newsByLeagueName, isLoading: newsByLeagueNameLoading, } = useNewsByLeagueName({ leagueName });
+    const { news, isLoading } = useNews()
 
     const data = leagueName ? newsByLeagueName : news;
 
@@ -16,9 +18,7 @@ const NewsList = ({ leagueName }: Props) => {
 
     if (loading) return <NewsSkeleton />;
 
-    if (!data || data.content.length === 0) return <NotFound />;
-
-    console.log(data.content[0].slug)
+    if (!data) return <NotFound />;
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">

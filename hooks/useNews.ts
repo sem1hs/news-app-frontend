@@ -1,40 +1,18 @@
-"use client";
-
 import {
   createNews,
   deleteNews,
   fetchNews,
-  fetchNewsByLeagueName,
-  fetchNewsBySlug,
   updateNews,
 } from "@/api/news/news";
 import { NewsCreateRequest, UpdateNewsRequest } from "@/types/news";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-type NewsProps = {
-  slug?: string;
-  leagueName?: string;
-}
-export const useNews = ({ slug, leagueName }: NewsProps = {}) => {
+export const useNews = () => {
   const queryClient = useQueryClient();
 
   const getAllNews = useQuery({
     queryKey: ["news"],
     queryFn: fetchNews,
-    staleTime: 1000 * 60 * 10,
-  });
-
-  const getBySlug = useQuery({
-    queryKey: ["team", "slug", slug],
-    queryFn: () => fetchNewsBySlug(slug as string),
-    enabled: !!slug,
-    staleTime: 1000 * 60 * 10,
-  });
-
-  const getByLeagueName = useQuery({
-    queryKey: ["leagueName", leagueName],
-    queryFn: () => fetchNewsByLeagueName({ leagueName }),
-    enabled: !!leagueName,
     staleTime: 1000 * 60 * 10,
   });
 
@@ -75,10 +53,6 @@ export const useNews = ({ slug, leagueName }: NewsProps = {}) => {
     createNews: createNewsMutation.mutate,
     deleteNews: deleteNewsMutation.mutate,
     news: getAllNews.data,
-    newsBySlug: getBySlug.data,
-    newsBySlugLoading: getBySlug.isLoading,
-    newsByLeagueName: getByLeagueName.data,
-    newsByLeagueNameLoading: getByLeagueName.isLoading,
     isLoading: getAllNews.isLoading,
   };
 };
