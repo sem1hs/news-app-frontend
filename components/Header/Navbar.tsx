@@ -8,7 +8,7 @@ const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   return (
-    <nav className="flex-1 px-12">
+    <nav className="flex-1 px-24">
       <ul className="flex items-center justify-around h-full">
         {NAV_ITEMS.map((item) => (
           <li key={item.href}>

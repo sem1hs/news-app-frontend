@@ -1,3 +1,5 @@
+import BreakingNewsBar from "@/components/BreakingNews/BreakingNewsBar";
+import TodayFixturesMini from "@/components/Fixture/TodayFixturesMini";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import MobileHeader from "@/components/Header/mobile/MobileHeader";
@@ -11,9 +13,11 @@ const Page = () => {
       <Header />
       <MobileHeader />
       <main>
+        <BreakingNewsBar />
         <NewsCarousel />
-        <PopularNews />
         <LatestNews />
+        <TodayFixturesMini />
+        <PopularNews />
       </main>
       <Footer />
     </>

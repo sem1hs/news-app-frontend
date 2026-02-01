@@ -12,7 +12,10 @@ const MobileNavAccordion = ({ mobileNavItem, handleClick }: Props) => {
       {mobileNavItem.dropdownItems?.map((item) => (
         <li key={item.label}>
           <Link
-            href={item.href}
+            href={{
+              pathname: item.href,
+              query: { league: item.label },
+            }}
             className="block py-2 text-zinc-400 hover:text-white transition"
             onClick={handleClick}
           >

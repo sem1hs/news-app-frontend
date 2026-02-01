@@ -55,6 +55,19 @@ export async function fetchNewsByLeagueName({
   return res.json();
 }
 
+export async function fetchBreakingNews(): Promise<NewsResponse[]> {
+  const res = await fetch("/api/news/breaking", {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw new Error("Son Dakika Haberleri getirilemedi");
+  }
+
+  return res.json();
+}
+
 export async function createNews(
   news: NewsCreateRequest
 ): Promise<NewsResponse> {

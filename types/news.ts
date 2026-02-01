@@ -12,6 +12,7 @@ export interface NewsResponse {
   createdDate: string;
   leagueName: string;
   teamName: string;
+  isBreaking: boolean;
 }
 
 export interface NewsCreateRequest {
@@ -25,6 +26,7 @@ export interface NewsCreateRequest {
   tags: string[] | string;
   imageUrl: string;
   views?: number;
+  isBreaking: boolean;
 }
 
 export interface UpdateNewsRequest {
