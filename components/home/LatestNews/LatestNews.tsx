@@ -3,149 +3,21 @@
 import { useState } from "react";
 import FeaturedNewsCard from "./FeaturedNewsCard";
 import SmallNewsCard from "./SmallNewsCard";
+import useLatestNews from "@/hooks/useLatestNews";
+import { NewsCategory } from "@/types/news";
+import FeaturedNewsCardSkeleton from "./FeaturedNewsCardSkeleton";
+import NotFound from "@/components/NotFound/NotFound";
+import { TABS } from "@/constants/LATEST_NEWS"
 
-const TABS = [
-  { key: "superlig", label: "Süper Lig" },
-  { key: "premier", label: "Premier League" },
-  { key: "laliga", label: "La Liga" },
-  { key: "seriea", label: "Serie A" },
-];
-
-const newsByLeague: Record<string, any[]> = {
-  superlig: [
-    {
-      title: "Galatasaray derbi öncesi hazırlıklarını tamamladı",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "galatasaray-derbi-oncesi",
-    },
-    {
-      title: "Fenerbahçe’de sakatlık şoku",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "fenerbahce-sakatlik",
-    },
-    {
-      title: "Beşiktaş’ta teknik direktör açıklaması",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "besiktas-aciklama",
-    },
-    {
-      title: "Trabzonspor deplasmanda kazandı",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "trabzonspor-galibiyet",
-    },
-    {
-      title: "VAR kararları tartışılıyor",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "var-kararlari",
-    },
-  ],
-  premier: [
-    {
-      title: "Galatasaray derbi öncesi hazırlıklarını tamamladı",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "galatasaray-derbi-oncesi",
-    },
-    {
-      title: "Fenerbahçe’de sakatlık şoku",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "fenerbahce-sakatlik",
-    },
-    {
-      title: "Beşiktaş’ta teknik direktör açıklaması",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "besiktas-aciklama",
-    },
-    {
-      title: "Trabzonspor deplasmanda kazandı",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "trabzonspor-galibiyet",
-    },
-    {
-      title: "VAR kararları tartışılıyor",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "var-kararlari",
-    },
-  ],
-  laliga: [
-    {
-      title: "Galatasaray derbi öncesi hazırlıklarını tamamladı",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "galatasaray-derbi-oncesi",
-    },
-    {
-      title: "Fenerbahçe’de sakatlık şoku",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "fenerbahce-sakatlik",
-    },
-    {
-      title: "Beşiktaş’ta teknik direktör açıklaması",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "besiktas-aciklama",
-    },
-    {
-      title: "Trabzonspor deplasmanda kazandı",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "trabzonspor-galibiyet",
-    },
-    {
-      title: "VAR kararları tartışılıyor",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "var-kararlari",
-    },
-  ],
-  seriea: [
-    {
-      title: "Galatasaray derbi öncesi hazırlıklarını tamamladı",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "galatasaray-derbi-oncesi",
-    },
-    {
-      title: "Fenerbahçe’de sakatlık şoku",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "fenerbahce-sakatlik",
-    },
-    {
-      title: "Beşiktaş’ta teknik direktör açıklaması",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "besiktas-aciklama",
-    },
-    {
-      title: "Trabzonspor deplasmanda kazandı",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "trabzonspor-galibiyet",
-    },
-    {
-      title: "VAR kararları tartışılıyor",
-      imageUrl: "/muci-trabzonspor.png",
-      category: "Süper Lig",
-      slug: "var-kararlari",
-    },
-  ],
-};
 
 export default function LatestNews() {
-  const [activeTab, setActiveTab] = useState("superlig");
+  const [activeTab, setActiveTab] = useState<NewsCategory>(NewsCategory.SUPER_LIG);
+  const { latestNews, isLoading, isError } = useLatestNews(activeTab)
 
-  const currentNews = newsByLeague[activeTab] || [];
+  if (isLoading) return <><FeaturedNewsCardSkeleton /></>
+  if (latestNews === undefined || isError) return <NotFound />
+
+  const currentNews = latestNews ?? [];
   const featured = currentNews[0];
   const others = currentNews.slice(1, 5);
 
@@ -159,13 +31,8 @@ export default function LatestNews() {
             {TABS.map((tab) => (
               <button
                 key={tab.key}
-                onClick={() => setActiveTab(tab.key)}
-                className={`pb-1 text-white  transition cursor-pointer ${
-                  activeTab === tab.key
-                    ? "border-b-2 border-primary font-semibold text-primary"
-                    : ""
-                }`}
-              >
+                onClick={() => setActiveTab(tab.key as NewsCategory)}
+                className={`pb-1 text-white  transition cursor-pointer ${activeTab === tab.key ? "border-b-2 border-primary font-semibold text-primary" : ""}`}>
                 {tab.label}
               </button>
             ))}

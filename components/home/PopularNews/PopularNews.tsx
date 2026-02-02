@@ -1,5 +1,7 @@
 import Link from "next/link";
-import PopularNewsCard from "./PopularNewsCard";
+import PopularNewsGrid from "./PopularNewsGrid";
+import { Suspense } from "react";
+import PopularNewsCardSkeleton from "./PopularNewsCardSkeleton";
 
 const PopularNews = () => {
   return (
@@ -18,18 +20,9 @@ const PopularNews = () => {
           </Link>
         </div>
 
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
-          {Array.from({ length: 8 }).map((_, index) => (
-            <PopularNewsCard
-              key={index}
-              title="Galatasaray’dan son dakika transfer hamlesi son dakika transfer hamlesi son dakika transfer hamlesi"
-              imageUrl="/muci-trabzonspor.png"
-              category="Süper Lig"
-              slug="muci"
-              viewCount={12450}
-            />
-          ))}
-        </div>
+        <Suspense fallback={<PopularNewsCardSkeleton />}>
+          <PopularNewsGrid />
+        </Suspense>
       </div>
     </section>
   );

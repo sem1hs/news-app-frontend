@@ -1,5 +1,6 @@
 import {
   FetchNewsParams,
+  NewsCategory,
   NewsCreateRequest,
   NewsResponse,
   UpdateNewsRequest,
@@ -63,6 +64,38 @@ export async function fetchBreakingNews(): Promise<NewsResponse[]> {
 
   if (!res.ok) {
     throw new Error("Son Dakika Haberleri getirilemedi");
+  }
+
+  return res.json();
+}
+
+export async function fetchPopularNews(dayRange: number): Promise<NewsResponse[]> {
+  const params = new URLSearchParams();
+  params.append("dayRange", dayRange.toString());
+
+  const res = await fetch(`/api/news/popular?${params.toString()}`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw new Error("Popüler Haberler getirilemedi");
+  }
+
+  return res.json();
+}
+
+export async function fetchLatestNewsByCategory(category: NewsCategory): Promise<NewsResponse[]> {
+  const params = new URLSearchParams();
+  params.append("category", category.toString());
+
+  const res = await fetch(`/api/news/latest?${params.toString()}`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw new Error("Son Haberler getirilemedi");
   }
 
   return res.json();

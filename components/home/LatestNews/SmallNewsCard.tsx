@@ -1,3 +1,5 @@
+import { formatCategoryName } from "@/lib/helper";
+import { NewsCategory } from "@/types/news";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,6 +16,8 @@ export default function SmallNewsCard({
   category,
   slug,
 }: SmallNewsCardProps) {
+  const formattedCategory = formatCategoryName(category as NewsCategory)
+
   return (
     <Link
       href={`/news/${slug}`}
@@ -30,7 +34,7 @@ export default function SmallNewsCard({
 
       <div className="absolute bottom-0 z-10 w-full p-4 text-white">
         <span className="mb-2 inline-block w-max rounded bg-amber-500 px-2 py-0.5 text-[10px] font-semibold text-black">
-          {category}
+          {formattedCategory}
         </span>
 
         <h4 className="line-clamp-2 text-sm font-semibold leading-snug transition-colors group-hover:text-primary">

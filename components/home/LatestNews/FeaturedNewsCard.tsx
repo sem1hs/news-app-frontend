@@ -1,3 +1,5 @@
+import { formatCategoryName } from "@/lib/helper";
+import { NewsCategory } from "@/types/news";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,6 +18,8 @@ export default function FeaturedNewsCard({
   slug,
   publishedAt,
 }: FeaturedNewsCardProps) {
+  const formattedCategory = formatCategoryName(category as NewsCategory)
+
   return (
     <Link
       href={`/news/${slug}`}
@@ -33,7 +37,7 @@ export default function FeaturedNewsCard({
 
       <div className="absolute bottom-0 z-10 w-full p-6 text-white">
         <span className="mb-3 inline-block w-max rounded bg-amber-500 px-3 py-1 text-xs font-semibold text-black">
-          {category}
+          {formattedCategory}
         </span>
 
         <h3 className="mb-2 line-clamp-3 text-xl font-bold leading-snug transition-colors group-hover:text-primary">

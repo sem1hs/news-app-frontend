@@ -48,3 +48,12 @@ export type FetchNewsParams = {
   page?: number;
   size?: number;
 };
+
+export enum NewsCategory {
+  SUPER_LIG = "SUPER_LIG",
+  PREMIER_LEAGUE = "PREMIER_LEAGUE",
+  BUNDESLIGA = "BUNDESLIGA",
+  SERIE_A = "SERIE_A",
+  LA_LIGA = "LA_LIGA",
+  LIGUE_1 = "LIGUE_1",
+}

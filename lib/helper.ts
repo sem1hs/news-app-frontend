@@ -1,4 +1,6 @@
+import { TABS } from "@/constants/LATEST_NEWS";
 import { LEAGUES } from "@/types/league";
+import { NewsCategory } from "@/types/news";
 
 export const formatMatchDayLabel = (isoDate: string) => {
   const matchDate = new Date(isoDate);
@@ -39,3 +41,7 @@ export const formatMatchTime = (isoDate: string) => {
 export const getLeagueIdByLabel = (label: string): number | undefined => {
   return LEAGUES.find((league) => league.name === label)?.id;
 };
+
+export const formatCategoryName = (category: NewsCategory): string | undefined => {
+  return TABS.find(tabs => tabs.key === category)?.label
+}

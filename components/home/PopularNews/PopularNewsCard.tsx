@@ -1,3 +1,5 @@
+import { formatCategoryName } from "@/lib/helper";
+import { NewsCategory } from "@/types/news";
 import { Eye } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,6 +19,9 @@ export default function PopularNewsCard({
   viewCount,
   slug,
 }: PopularNewsCardProps) {
+  const formattedCategory = formatCategoryName(category as NewsCategory)
+
+
   return (
     <Link href={`/news/${slug}`}>
       <article className="group overflow-hidden rounded-xl border bg-[#111517] transition hover:shadow-lg">
@@ -35,7 +40,7 @@ export default function PopularNewsCard({
           </h3>
           <div className="w-full flex items-center">
             <span className="rounded bg-amber-500 px-2 py-1 text-xs font-semibold text-black w-max">
-              {category}
+              {formattedCategory}
             </span>
             {viewCount !== undefined && (
               <span className="ml-auto block text-xs text-muted-foreground flex items-center gap-1">
