@@ -18,7 +18,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 };
 
 export default function NewsCarousel() {
-  const { news, isLoading } = useNews();
+  const { news, isLoading } = useNews({ page: 0, size: 6 });
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
@@ -71,24 +71,24 @@ export default function NewsCarousel() {
           <div className="flex">
             {isLoading
               ? Array.from({ length: 3 }).map((_, i) => (
-                  <div key={i} className="min-w-full shrink-0">
-                    <NewsCarouselSkeleton />
-                  </div>
-                ))
+                <div key={i} className="min-w-full shrink-0">
+                  <NewsCarouselSkeleton />
+                </div>
+              ))
               : news?.content.map((item) => (
-                  <div key={item.id} className="min-w-full shrink-0">
-                    <NewsCarouselItem
-                      title={item.title}
-                      slug={item.slug}
-                      imageUrl={item.imageUrl}
-                      category={CATEGORY_LABELS[item.category] ?? item.category}
-                      date={new Date(item.createdDate).toLocaleDateString(
-                        "tr-TR",
-                        { day: "numeric", month: "long", year: "numeric" }
-                      )}
-                    />
-                  </div>
-                ))}
+                <div key={item.id} className="min-w-full shrink-0">
+                  <NewsCarouselItem
+                    title={item.title}
+                    slug={item.slug}
+                    imageUrl={item.imageUrl}
+                    category={CATEGORY_LABELS[item.category] ?? item.category}
+                    date={new Date(item.createdDate).toLocaleDateString(
+                      "tr-TR",
+                      { day: "numeric", month: "long", year: "numeric" }
+                    )}
+                  />
+                </div>
+              ))}
           </div>
         </div>
 
@@ -111,11 +111,10 @@ export default function NewsCarousel() {
             <button
               key={index}
               onClick={() => scrollTo(index)}
-              className={`h-2.5 w-2.5 rounded-full transition ${
-                index === selectedIndex
-                  ? "bg-amber-500 scale-110"
-                  : "bg-white/40 hover:bg-white/70"
-              }`}
+              className={`h-2.5 w-2.5 rounded-full transition ${index === selectedIndex
+                ? "bg-amber-500 scale-110"
+                : "bg-white/40 hover:bg-white/70"
+                }`}
               aria-label={`Slide ${index + 1}`}
             />
           ))}

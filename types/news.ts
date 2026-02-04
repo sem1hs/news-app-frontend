@@ -49,6 +49,12 @@ export type FetchNewsParams = {
   size?: number;
 };
 
+export type FetchNewsParamsBySearch = {
+  search: string;
+  page?: number;
+  size?: number;
+};
+
 export enum NewsCategory {
   SUPER_LIG = "SUPER_LIG",
   PREMIER_LEAGUE = "PREMIER_LEAGUE",

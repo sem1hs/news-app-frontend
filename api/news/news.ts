@@ -1,14 +1,23 @@
 import {
   FetchNewsParams,
+  FetchNewsParamsBySearch,
   NewsCategory,
   NewsCreateRequest,
   NewsResponse,
   UpdateNewsRequest,
 } from "@/types/news";
-import { Page } from "@/types/pageable";
+import { Page, PageParams } from "@/types/pageable";
 
-export async function fetchNews(): Promise<Page<NewsResponse>> {
-  const res = await fetch("/api/news", {
+export async function fetchNews({
+  page = 0,
+  size = 16,
+}: PageParams): Promise<Page<NewsResponse>> {
+  const params = new URLSearchParams();
+
+  params.append("page", page.toString());
+  params.append("size", size.toString());
+
+  const res = await fetch(`/api/news?${params.toString()}`, {
     method: "GET",
     credentials: "include",
   });
@@ -100,6 +109,30 @@ export async function fetchLatestNewsByCategory(category: NewsCategory): Promise
 
   return res.json();
 }
+
+export async function fetchNewsBySearchQuery({
+  search,
+  page = 0,
+  size = 16,
+}: FetchNewsParamsBySearch): Promise<Page<NewsResponse>> {
+  const params = new URLSearchParams();
+
+  params.append("q", search.toString());
+  params.append("page", page.toString());
+  params.append("size", size.toString());
+
+  const res = await fetch(`/api/news/search?${params.toString()}`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw new Error("Haberler getirilemedi");
+  }
+
+  return res.json();
+}
+
 
 export async function createNews(
   news: NewsCreateRequest

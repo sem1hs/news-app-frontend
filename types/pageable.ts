@@ -26,3 +26,8 @@ export interface Sort {
   sorted: boolean;
   unsorted: boolean;
 }
+
+export type PageParams = {
+  page?: number;
+  size?: number;
+}

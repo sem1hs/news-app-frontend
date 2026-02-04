@@ -1,11 +1,13 @@
+import { Suspense } from "react";
 import NewsList from "./NewsList";
+import NewsSkeleton from "./NewsSkeleton";
 
 type Props = {
   queryParam: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 const News = async ({ queryParam }: Props) => {
-  const { league } = await queryParam;
+  const { league, search } = await queryParam;
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-8">
@@ -13,18 +15,18 @@ const News = async ({ queryParam }: Props) => {
         <h1 className="text-2xl sm:text-3xl font-bold text-white">
           Futbol Haberleri
         </h1>
+
+        {search !== undefined && <h1 className="text-md sm:text-xl font-bold text-white">
+          “{search}” için arama sonuçları
+        </h1>}
       </div>
 
-      <>
-        {league !== undefined ? <NewsList leagueName={league} /> : <NewsList />}
-      </>
-
-      <div className="flex justify-center mt-10">
-        <button className="px-6 py-2.5 rounded-lg bg-amber-500 transition text-sm font-bold text-black cursor-pointer">
-          Daha Fazla Yükle
-        </button>
-      </div>
-    </section>
+      <Suspense fallback={<NewsSkeleton />}>
+        {league === undefined && search === undefined && <NewsList />}
+        {league === undefined && search !== undefined && <NewsList search={search} />}
+        {league !== undefined && search === undefined && <NewsList leagueName={league} />}
+      </Suspense>
+    </section >
   );
 };
 

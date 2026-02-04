@@ -6,10 +6,16 @@ import {
 import { SearchQuery } from "@/types/SearchQuery";
 import { Field, Form, Formik } from "formik";
 import { Search } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const SearchBar = () => {
-  const handleSubmit = ({ searchQuery }: SearchQuery) => {
-    console.log(searchQuery);
+  const router = useRouter();
+
+  const handleSubmit = ({ searchQuery }: SearchQuery, { resetForm }: { resetForm: () => void }) => {
+    if (!searchQuery || searchQuery.trim().length < 2) return;
+
+    router.push(`/news?search=${encodeURIComponent(searchQuery)}`);
+    resetForm();
   };
 
   return (

@@ -5,14 +5,15 @@ import {
   updateNews,
 } from "@/api/news/news";
 import { NewsCreateRequest, UpdateNewsRequest } from "@/types/news";
+import { PageParams } from "@/types/pageable";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const useNews = () => {
+export const useNews = ({ page, size }: PageParams) => {
   const queryClient = useQueryClient();
 
   const getAllNews = useQuery({
-    queryKey: ["news"],
-    queryFn: fetchNews,
+    queryKey: ["news", page],
+    queryFn: () => fetchNews({ page, size }),
     staleTime: 1000 * 60 * 10,
   });
 

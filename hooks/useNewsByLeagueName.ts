@@ -3,14 +3,16 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 type NewsProps = {
     leagueName: string;
+    page?: number;
+    size?: number;
 }
 
-const useNewsByLeagueName = ({ leagueName }: NewsProps) => {
+const useNewsByLeagueName = ({ leagueName, page, size }: NewsProps) => {
     const queryClient = useQueryClient();
 
     const getByLeagueName = useQuery({
-        queryKey: ["leagueName", leagueName],
-        queryFn: () => fetchNewsByLeagueName({ leagueName }),
+        queryKey: ["leagueName", leagueName, page],
+        queryFn: () => fetchNewsByLeagueName({ leagueName, page, size }),
         enabled: !!leagueName,
         staleTime: 1000 * 60 * 10,
     });
