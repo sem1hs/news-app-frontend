@@ -1,4 +1,4 @@
-import GetNews from "@/components/AdminPanel/page/GetNews";
+import GetNews from "@/components/AdminPanel/news/GetNews";
 
 const GetNewsPage = () => {
   return (

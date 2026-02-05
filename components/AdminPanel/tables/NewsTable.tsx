@@ -6,7 +6,7 @@ import { useCallback, useState } from "react";
 import UpdateNewsModal from "../modal/UpdateNewsModal";
 
 export default function NewsTable({ data }: { data: NewsResponse[] }) {
-  const { deleteNews } = useNews();
+  const { deleteNews } = useNews({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedNews, setSelectedNews] = useState<NewsResponse | null>(null);
 

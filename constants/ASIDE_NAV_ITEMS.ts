@@ -14,11 +14,32 @@ export const AsideNavItems: AsideNavItemType[] = [
     links: [
       {
         label: "Haberleri Görüntüle",
-        href: "/admin/get-news",
+        href: "/admin/news/get-news",
       },
       {
         label: "Haber Oluştur",
-        href: "/admin/create-news",
+        href: "/admin/news/create-news",
+      },
+    ],
+  },
+  {
+    label: "Fikstür",
+    links: [
+      {
+        label: "Bugünün Fikstürünü Görüntüle",
+        href: "/admin/fixture/get-today-fixture",
+      },
+      {
+        label: "Lige Göre Haftalık Fikstür Görüntüle",
+        href: "/admin/fixture/get-fixture-by-league-weekly",
+      },
+      {
+        label: "Lige Göre Tüm Fikstürü Görüntüle",
+        href: "/admin/fixture/get-fixture",
+      },
+      {
+        label: "Fikstür Oluştur",
+        href: "/admin/fixture/create-fixture",
       },
     ],
   },

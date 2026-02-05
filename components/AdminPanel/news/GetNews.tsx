@@ -4,7 +4,7 @@ import NewsTable from "../tables/NewsTable";
 import { useNews } from "@/hooks/useNews";
 
 const GetNews = () => {
-  const { news, isLoading } = useNews();
+  const { news, isLoading } = useNews({});
   const [visible, setVisible] = useState<boolean>(false);
 
   const handleClick = useCallback(

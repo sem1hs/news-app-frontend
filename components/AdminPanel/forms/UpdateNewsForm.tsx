@@ -1,5 +1,5 @@
 import { newsUpdateSchema } from "@/schemas/newsSchema";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import FormRow from "./FormRow";
 import FormTextArea from "./FormTextArea";
 import { NewsResponse, UpdateNewsRequest } from "@/types/news";
@@ -15,7 +15,7 @@ type Props = {
 };
 
 const UpdateNewsForm = ({ news, onClose }: Props) => {
-  const { updateNews } = useNews();
+  const { updateNews } = useNews({});
   const { leagues } = useLeagues();
 
   const handleSubmit = async (

@@ -12,7 +12,7 @@ import { useLeagues } from "@/hooks/useLeagues";
 import TeamSelect from "./TeamSelect";
 
 export default function CreateNewsForm() {
-  const { createNews } = useNews();
+  const { createNews } = useNews({});
   const { leagues } = useLeagues();
 
   const handleSubmit = async (
@@ -102,7 +102,7 @@ export default function CreateNewsForm() {
                   ))}
                 </Field>
 
-                <TeamSelect />
+                <TeamSelect name="teamId" />
               </FormRow>
 
               <FormRow>
