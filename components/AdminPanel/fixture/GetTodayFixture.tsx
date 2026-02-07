@@ -1,9 +1,9 @@
 "use client"
 import useFixtureToday from '@/hooks/useFixtureToday';
 import React, { useCallback, useState } from 'react'
-import TodayFixtureTable from '../tables/TodayFixtureTable';
 import FixtureSkeleton from '../skeleton/FixtureSkeleton';
 import TodayFixtureEmptyState from '../skeleton/TodayFixtureEmptyState';
+import FixtureTable from '../tables/FixtureTable';
 
 const GetTodayFixture = () => {
     const { fixture, isLoading } = useFixtureToday();
@@ -19,9 +19,8 @@ const GetTodayFixture = () => {
 
     if (isLoading) return <FixtureSkeleton />
 
-    if (!fixture || Object.keys(fixture).length === 0) {
-        return <TodayFixtureEmptyState />;
-    }
+    if (!fixture || Object.keys(fixture).length === 0) return <TodayFixtureEmptyState />;
+
 
     return (
         <>
@@ -32,7 +31,7 @@ const GetTodayFixture = () => {
                 {isLoading ? "Yükleniyor..." : "Fikstürü Getir"}
             </button>
 
-            {visible && fixture && <TodayFixtureTable data={fixture} />}
+            {visible && fixture && <FixtureTable grouped data={fixture} />}
         </>
     );
 }

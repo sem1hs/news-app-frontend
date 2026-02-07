@@ -27,13 +27,18 @@ export type FixtureResponse = {
     status: "SCHEDULED" | "LIVE" | "FINISHED";
 }
 
+export type WeeklyFixtures = {
+    week: number;
+    fixtures: FixtureResponse[];
+}
+
 export type UpdateFixtureRequest = {
     id: number;
     matchDate?: string;
-    stadium?: string | null;
-    season?: string | null;
-    homeScore?: number | null;
-    awayScore?: number | null;
+    stadium?: string;
+    season?: string;
+    homeScore?: number;
+    awayScore?: number;
     status?: "SCHEDULED" | "LIVE" | "FINISHED";
 };
 

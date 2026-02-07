@@ -1,19 +1,19 @@
-import GetFixtureByLeagueAndWeek from '@/components/AdminPanel/fixture/GetFixtureByLeagueAndWeek'
+import GetFixtureByLeague from '@/components/AdminPanel/fixture/GetFixtureByLeague'
 import FixtureSkeleton from '@/components/AdminPanel/skeleton/FixtureSkeleton'
-import React, { Suspense } from 'react'
+import { Suspense } from 'react'
 
-const GetFixtureByLeagueAndWeeklyPage = () => {
+const GetFixtureByLeaguePage = () => {
     return (
         <div className="h-full">
             <h1 className="text-xl md:text-3xl font-bold text-white text-center py-6">
-                Lige Göre Haftalık Fikstür
+                Lige Göre Tüm Fikstür
             </h1>
 
             <Suspense fallback={<FixtureSkeleton />}>
-                <GetFixtureByLeagueAndWeek />
+                <GetFixtureByLeague />
             </Suspense>
         </div>
     )
 }
 
-export default GetFixtureByLeagueAndWeeklyPage
+export default GetFixtureByLeaguePage

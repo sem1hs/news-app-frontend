@@ -1,4 +1,4 @@
-import { CreateFixtureRequest, FixtureResponse, TodayFixtureResponse, UpdateFixtureRequest } from "@/types/fixture";
+import { CreateFixtureRequest, FixtureResponse, TodayFixtureResponse, UpdateFixtureRequest, WeeklyFixtures } from "@/types/fixture";
 
 type FixtureByLeagueAndWeekParams = {
   leagueId: number;
@@ -39,6 +39,24 @@ export async function fetchFixtureByLeagueAndWeek({
   return res.json();
 }
 
+export async function fetchFixtureByLeague({
+  leagueId,
+}: { leagueId: number }): Promise<WeeklyFixtures[]> {
+  const params = new URLSearchParams();
+
+  params.append("leagueId", leagueId.toString());
+
+  const res = await fetch(`/api/fixtures?${params.toString()}`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw new Error("Fikstür getirilemedi");
+  }
+
+  return res.json();
+}
 export async function createFixture(
   fixture: CreateFixtureRequest
 ): Promise<FixtureResponse> {
@@ -54,6 +72,7 @@ export async function createFixture(
 
   return res.json();
 }
+
 
 export async function updateFixture(fixture: UpdateFixtureRequest): Promise<FixtureResponse> {
   const res = await fetch(`/api/fixtures/${fixture.id}`, {

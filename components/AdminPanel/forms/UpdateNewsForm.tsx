@@ -107,7 +107,7 @@ const UpdateNewsForm = ({ news, onClose }: Props) => {
                   ))}
                 </Field>
 
-                <TeamSelect />
+                <TeamSelect name="teamId" />
               </FormRow>
 
               <FormRow>

@@ -35,7 +35,7 @@ export const AsideNavItems: AsideNavItemType[] = [
       },
       {
         label: "Lige Göre Tüm Fikstürü Görüntüle",
-        href: "/admin/fixture/get-fixture",
+        href: "/admin/fixture/get-fixture-by-league",
       },
       {
         label: "Fikstür Oluştur",

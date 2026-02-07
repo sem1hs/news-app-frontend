@@ -25,10 +25,11 @@ export default function UpdateFixtureForm({ fixture, onClose }: Props) {
             matchDate: values.matchDate || undefined,
             stadium: values.stadium || undefined,
             season: values.season || undefined,
-            homeScore: values.homeScore !== undefined ? values.homeScore : undefined,
-            awayScore: values.awayScore !== undefined ? values.awayScore : undefined,
+            homeScore: values.homeScore === 0 ? undefined : Number(values.homeScore),
+            awayScore: values.awayScore === 0 ? undefined : Number(values.awayScore),
             status: values.status || undefined,
         };
+
 
         updateFixture({ fixture: request });
         onClose();
@@ -38,7 +39,12 @@ export default function UpdateFixtureForm({ fixture, onClose }: Props) {
     return (
         <div className="mt-6 w-full overflow-x-auto px-6">
             <Formik
-                initialValues={{ ...fixture }}
+                initialValues={{
+                    ...fixture,
+                    stadium: fixture.stadium ?? undefined,
+                    homeScore: fixture.homeScore ?? undefined,
+                    awayScore: fixture.awayScore ?? undefined,
+                }}
                 validationSchema={updateFixtureSchema}
                 onSubmit={handleSubmit}
             >
@@ -49,8 +55,8 @@ export default function UpdateFixtureForm({ fixture, onClose }: Props) {
                         </FormRow>
 
                         <FormRow>
-                            <FormInput formInput={{ name: "homeScore", placeholder: "Ev Sahibi Skor" }} />
-                            <FormInput formInput={{ name: "awayScore", placeholder: "Deplasman Skor" }} />
+                            <FormInput formInput={{ name: "homeScore", type: "number", placeholder: "Ev Sahibi Skor" }} />
+                            <FormInput formInput={{ name: "awayScore", type: "number", placeholder: "Deplasman Skor" }} />
                         </FormRow>
 
                         <FormRow>
