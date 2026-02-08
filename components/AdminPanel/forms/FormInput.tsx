@@ -35,4 +35,5 @@ const FormInput = ({ formInput }: Props) => {
   );
 };
 
+
 export default FormInput;

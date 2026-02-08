@@ -43,6 +43,7 @@ export default function NewsTable({ data }: { data: NewsResponse[] }) {
               <th className="p-2 border">Görüntülenme</th>
               <th className="p-2 border">Oluşturan</th>
               <th className="p-2 border">Tarih</th>
+              <th className="p-2 border">Son Dakika Haberi</th>
               <th className="p-2 border">İşlemler</th>
             </tr>
           </thead>
@@ -113,6 +114,10 @@ export default function NewsTable({ data }: { data: NewsResponse[] }) {
 
                 <td className="p-2 border border-amber-500 text-center">
                   {new Date(news.createdDate).toLocaleString("tr-TR")}
+                </td>
+
+                <td className="p-2 border border-amber-500 text-center">
+                  {news.isBreaking ? "Evet" : "Hayır"}
                 </td>
 
                 <td className="p-2 border border-amber-500 text-center">

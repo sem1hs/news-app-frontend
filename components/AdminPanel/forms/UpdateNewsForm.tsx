@@ -69,21 +69,36 @@ const UpdateNewsForm = ({ news, onClose }: Props) => {
               </FormRow>
 
               <FormRow>
-                <Field
-                  as="select"
-                  name="category"
-                  className="w-full rounded-lg bg-[#1a1f26] px-4 py-2.5 text-white"
-                >
-                  <option value="" disabled>
-                    Kategori Seç
-                  </option>
-                  <option value="SUPER_LIG">Süper Lig</option>
-                  <option value="PREMIER_LEAGUE">Premier League</option>
-                  <option value="LA_LIGA">La Liga</option>
-                  <option value="BUNDESLIGA">Bundesliga</option>
-                  <option value="SERIE_A">Serie A</option>
-                  <option value="LIGUE_1">Ligue 1</option>
-                </Field>
+                <div className="w-full">
+                  <Field
+                    as="select"
+                    name="category"
+                    className="w-full rounded-lg bg-[#1a1f26] px-4 py-2.5 text-white"
+                  >
+                    <option value="" disabled>
+                      Kategori
+                    </option>
+                    <option value="SUPER_LIG">Süper Lig</option>
+                    <option value="PREMIER_LEAGUE">Premier League</option>
+                    <option value="LA_LIGA">La Liga</option>
+                    <option value="BUNDESLIGA">Bundesliga</option>
+                    <option value="SERIE_A">Serie A</option>
+                    <option value="LIGUE_1">Ligue 1</option>
+                  </Field>
+                </div>
+
+                <div className="w-full bg-[#1a1f26] rounded-lg">
+                  <div className="px-4 py-2 flex items-center gap-3">
+                    <Field
+                      type="checkbox"
+                      name="isBreaking"
+                      className="h-5 w-5 accent-amber-500 cursor-pointer"
+                    />
+                    <span className="text-white">
+                      Son Dakika Haberi
+                    </span>
+                  </div>
+                </div>
               </FormRow>
 
               <FormRow>

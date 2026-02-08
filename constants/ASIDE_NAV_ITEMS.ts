@@ -43,4 +43,17 @@ export const AsideNavItems: AsideNavItemType[] = [
       },
     ],
   },
+  {
+    label: "Puan Durumu",
+    links: [
+      {
+        label: "Lige Göre Puan Durumu Görme",
+        href: "/admin/standing/get-standing",
+      },
+      {
+        label: "Puan Durumu Ekleme",
+        href: "/admin/standing/create-standing",
+      },
+    ],
+  },
 ];

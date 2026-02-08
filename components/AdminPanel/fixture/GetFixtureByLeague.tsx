@@ -6,7 +6,7 @@ import LeagueAndWeekSelect from './LeagueAndWeekSelect';
 import { useLeagues } from '@/hooks/useLeagues';
 import { FixtureResponse } from '@/types/fixture';
 import FixtureTable from '../tables/FixtureTable';
-import FixtureEmptyState from '../skeleton/WeeklyFixtureEmptyState';
+import EmptyState from '../skeleton/EmptyState';
 
 const GetFixtureByLeague = () => {
     const { leagues } = useLeagues()
@@ -45,7 +45,7 @@ const GetFixtureByLeague = () => {
             </button>
             {visible && fixture && < LeagueAndWeekSelect leagueId={leagueId} setLeagueId={setLeagueId} leagues={leagues} />}
             {visible && Object.keys(groupedData).length !== 0 && <FixtureTable grouped data={groupedData} />}
-            {visible && Object.keys(groupedData).length === 0 && <FixtureEmptyState title='Bu lig için fikstür tanımlanmamış' description='Seçilen lig için henüz fikstür eklenmemiş.' />}
+            {visible && Object.keys(groupedData).length === 0 && <EmptyState title='Bu lig için fikstür tanımlanmamış' description='Seçilen lig için henüz fikstür eklenmemiş.' />}
         </div>
     );
 }

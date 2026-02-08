@@ -41,6 +41,7 @@ export interface UpdateNewsRequest {
   tags?: string[] | string;
   imageUrl?: string;
   views?: number;
+  isBreaking: boolean;
 }
 
 export type FetchNewsParams = {

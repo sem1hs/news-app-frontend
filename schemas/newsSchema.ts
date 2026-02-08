@@ -45,4 +45,5 @@ export const newsInitialValues: NewsCreateRequest = {
   teamId: 0,
   tags: [""],
   imageUrl: "",
+  isBreaking: false
 };
