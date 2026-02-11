@@ -23,6 +23,32 @@ export const AsideNavItems: AsideNavItemType[] = [
     ],
   },
   {
+    label: "Takım",
+    links: [
+      {
+        label: "Lige Göre Takımları Görüntüle",
+        href: "/admin/team/get-team-by-league"
+      },
+      {
+        label: "Takım Oluştur",
+        href: "/admin/team/create-team"
+      }
+    ]
+  },
+  {
+    label: "Lig",
+    links: [
+      {
+        label: "Ligleri Görüntüle",
+        href: "/admin/league/get-leagues"
+      },
+      {
+        label: "Lig Oluştur",
+        href: "/admin/league/create-league"
+      }
+    ]
+  },
+  {
     label: "Fikstür",
     links: [
       {

@@ -6,8 +6,8 @@ type Props = {
 
 const AsideNav = ({ isOpen }: Props) => {
   return (
-    <nav className="flex flex-col gap-2">
-      <ul>{isOpen && <AsideNavItemList />}</ul>
+    <nav >
+      <ul className="flex flex-col gap-4">{isOpen && <AsideNavItemList />}</ul>
     </nav>
   );
 };

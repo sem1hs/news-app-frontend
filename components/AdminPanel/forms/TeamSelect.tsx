@@ -10,7 +10,7 @@ type Props = {
 
 export default function TeamSelect({ name, excludeTeamId }: Props) {
   const { values } = useFormikContext<any>();
-  const { teams, isLoading } = useTeams(values.leagueId);
+  const { teams, isLoading } = useTeams({ leagueId: values.leagueId });
 
   return (
     <Field

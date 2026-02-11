@@ -59,14 +59,14 @@ const UpdateStandingForm = ({ standing, onClose }: Props) => {
                                 formInput={{
                                     name: "played",
                                     type: "number",
-                                    placeholder: String(standing.played),
+                                    placeholder: "Oynanan Maç Sayısı",
                                 }}
                             />
                             <FormInput
                                 formInput={{
                                     name: "won",
                                     type: "number",
-                                    placeholder: String(standing.won),
+                                    placeholder: "Kazanılan Maç Sayısı",
                                 }}
                             />
                         </FormRow>
@@ -76,14 +76,14 @@ const UpdateStandingForm = ({ standing, onClose }: Props) => {
                                 formInput={{
                                     name: "draw",
                                     type: "number",
-                                    placeholder: String(standing.draw),
+                                    placeholder: "Beraberlik Maç Sayısı",
                                 }}
                             />
                             <FormInput
                                 formInput={{
                                     name: "lost",
                                     type: "number",
-                                    placeholder: String(standing.lost),
+                                    placeholder: "Kaybedilen Maç Sayısı",
                                 }}
                             />
                         </FormRow>
@@ -93,14 +93,14 @@ const UpdateStandingForm = ({ standing, onClose }: Props) => {
                                 formInput={{
                                     name: "goalsFor",
                                     type: "number",
-                                    placeholder: String(standing.goalsFor),
+                                    placeholder: "Atılan Gol",
                                 }}
                             />
                             <FormInput
                                 formInput={{
                                     name: "goalsAgainst",
                                     type: "number",
-                                    placeholder: String(standing.goalsAgainst),
+                                    placeholder: "Yenen Gol",
                                 }}
                             />
                         </FormRow>

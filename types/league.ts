@@ -5,6 +5,19 @@ export type LeagueResponse = {
   logoUrl: string;
 };
 
+export type CreateLeagueRequest = {
+  name: string;
+  country: string;
+  logoUrl: string;
+}
+
+export type UpdateLeagueRequest = {
+  id?: number;
+  name?: string;
+  country?: string;
+  logoUrl?: string;
+};
+
 export type League = {
   id: number;
   name: string;
