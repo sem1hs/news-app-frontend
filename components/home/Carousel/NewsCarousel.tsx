@@ -27,7 +27,7 @@ export default function NewsCarousel() {
     Autoplay({
       delay: 4000,
       stopOnInteraction: false,
-    })
+    }),
   );
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
@@ -46,19 +46,27 @@ export default function NewsCarousel() {
     (index: number) => {
       emblaApi?.scrollTo(index);
     },
-    [emblaApi]
+    [emblaApi],
   );
 
   useEffect(() => {
     if (!emblaApi) return;
 
+    const onSelect = () => {
+      setSelectedIndex(emblaApi.selectedScrollSnap());
+    };
+
+    emblaApi.reInit();
+
     setScrollSnaps(emblaApi.scrollSnapList());
     setSelectedIndex(emblaApi.selectedScrollSnap());
 
-    emblaApi.on("select", () => {
-      setSelectedIndex(emblaApi.selectedScrollSnap());
-    });
-  }, [emblaApi]);
+    emblaApi.on("select", onSelect);
+
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi, news]);
 
   return (
     <section className="relative w-full py-8 md:py-16 overflow-hidden">
@@ -71,24 +79,24 @@ export default function NewsCarousel() {
           <div className="flex">
             {isLoading
               ? Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="min-w-full shrink-0">
-                  <NewsCarouselSkeleton />
-                </div>
-              ))
+                  <div key={i} className="min-w-full shrink-0">
+                    <NewsCarouselSkeleton />
+                  </div>
+                ))
               : news?.content.map((item) => (
-                <div key={item.id} className="min-w-full shrink-0">
-                  <NewsCarouselItem
-                    title={item.title}
-                    slug={item.slug}
-                    imageUrl={item.imageUrl}
-                    category={CATEGORY_LABELS[item.category] ?? item.category}
-                    date={new Date(item.createdDate).toLocaleDateString(
-                      "tr-TR",
-                      { day: "numeric", month: "long", year: "numeric" }
-                    )}
-                  />
-                </div>
-              ))}
+                  <div key={item.id} className="min-w-full shrink-0">
+                    <NewsCarouselItem
+                      title={item.title}
+                      slug={item.slug}
+                      imageUrl={item.imageUrl}
+                      category={CATEGORY_LABELS[item.category] ?? item.category}
+                      date={new Date(item.createdDate).toLocaleDateString(
+                        "tr-TR",
+                        { day: "numeric", month: "long", year: "numeric" },
+                      )}
+                    />
+                  </div>
+                ))}
           </div>
         </div>
 
@@ -111,10 +119,11 @@ export default function NewsCarousel() {
             <button
               key={index}
               onClick={() => scrollTo(index)}
-              className={`h-2.5 w-2.5 rounded-full transition ${index === selectedIndex
-                ? "bg-amber-500 scale-110"
-                : "bg-white/40 hover:bg-white/70"
-                }`}
+              className={`h-2.5 w-2.5 rounded-full transition ${
+                index === selectedIndex
+                  ? "bg-amber-500 scale-110"
+                  : "bg-white/40 hover:bg-white/70"
+              }`}
               aria-label={`Slide ${index + 1}`}
             />
           ))}
