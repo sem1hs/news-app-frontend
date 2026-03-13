@@ -1,7 +1,12 @@
-import { TeamCreateRequest, TeamResponse, TeamUpdateRequest } from "@/types/teams";
+import { fetchWithAuth } from "@/lib/fetchWithAuth";
+import {
+  TeamCreateRequest,
+  TeamResponse,
+  TeamUpdateRequest,
+} from "@/types/teams";
 
 export async function fetchTeams(leagueId: number): Promise<TeamResponse[]> {
-  const res = await fetch(`/api/teams?leagueId=${leagueId}`, {
+  const res = await fetchWithAuth(`/api/teams?leagueId=${leagueId}`, {
     method: "GET",
     credentials: "include",
   });
@@ -14,9 +19,9 @@ export async function fetchTeams(leagueId: number): Promise<TeamResponse[]> {
 }
 
 export async function createTeam(
-  team: TeamCreateRequest
+  team: TeamCreateRequest,
 ): Promise<TeamResponse> {
-  const res = await fetch("/api/teams", {
+  const res = await fetchWithAuth("/api/teams", {
     method: "POST",
     credentials: "include",
     body: JSON.stringify(team),
@@ -30,9 +35,9 @@ export async function createTeam(
 }
 
 export async function updateTeam(
-  team: TeamUpdateRequest
+  team: TeamUpdateRequest,
 ): Promise<TeamResponse> {
-  const res = await fetch(`/api/teams/${team.id}`, {
+  const res = await fetchWithAuth(`/api/teams/${team.id}`, {
     method: "PATCH",
     credentials: "include",
     body: JSON.stringify(team),
@@ -46,7 +51,7 @@ export async function updateTeam(
 }
 
 export async function deleteTeam(teamId: number): Promise<void> {
-  const res = await fetch(`/api/teams/${teamId}`, {
+  const res = await fetchWithAuth(`/api/teams/${teamId}`, {
     method: "DELETE",
     credentials: "include",
   });

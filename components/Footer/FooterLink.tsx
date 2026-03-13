@@ -7,7 +7,14 @@ type Props = {
 const FooterLink = ({ footerLink }: Props) => {
   return (
     <li className="text-sm text-zinc-400 hover:text-white transition">
-      <Link href={footerLink.href}>{footerLink.label}</Link>
+      <Link
+        href={{
+          pathname: footerLink.href,
+          query: { league: footerLink.label },
+        }}
+      >
+        {footerLink.label}
+      </Link>
     </li>
   );
 };

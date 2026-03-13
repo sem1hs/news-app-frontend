@@ -3,18 +3,19 @@
 import { CircleUser, LogOut } from "lucide-react";
 import React, { useCallback, useState } from "react";
 import AuthModal from "./AuthModal";
-import { useUser } from "@/hooks/useUser";
 import { useAuth } from "@/hooks/useAuth";
+import { useUser } from "@/hooks/useUser";
 import Link from "next/link";
 
 const AuthClient = () => {
   const { logoutFn } = useAuth();
-  const { user } = useUser();
-  const [authOpen, setAuthOpen] = useState<boolean>(false);
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const { user, loading } = useUser();
+
+  const [authOpen, setAuthOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const isAuthenticated = !!user;
-  const isAdmin = !!user?.role?.some((r: string) => r === "ROLE_ADMIN");
+  const isAdmin = user?.roles?.includes("ROLE_ADMIN");
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -23,16 +24,13 @@ const AuthClient = () => {
       if (!isAuthenticated) setAuthOpen(true);
       else setMenuOpen((prev) => !prev);
     },
-    [isAuthenticated]
+    [isAuthenticated],
   );
 
-  const handleLogout = useCallback(
-    async (e: React.MouseEvent<HTMLButtonElement>) => {
-      logoutFn();
-      setMenuOpen(false);
-    },
-    [logoutFn]
-  );
+  const handleLogout = useCallback(() => {
+    logoutFn();
+    setMenuOpen(false);
+  }, [logoutFn]);
 
   const closeModal = useCallback(() => {
     setAuthOpen(false);
@@ -45,8 +43,13 @@ const AuthClient = () => {
         onClick={handleClick}
       >
         <CircleUser className="w-[18px] md:w-[24px]" />
+
         <span className="hidden md:block">
-          {!isAuthenticated ? " Oturum Aç / Kayıt Ol" : user?.username}
+          {loading
+            ? "..."
+            : !isAuthenticated
+              ? "Oturum Aç / Kayıt Ol"
+              : user.username}
         </span>
       </button>
 
@@ -59,10 +62,14 @@ const AuthClient = () => {
             <LogOut className="w-4 h-4" />
             Çıkış Yap
           </button>
+
           {isAdmin && (
-            <button className="cursor-pointer flex w-full items-center gap-2 px-4 py-2 text-sm text-white hover:bg-[#272C33]">
-              <Link href="/admin">Admin Panel</Link>
-            </button>
+            <Link
+              href="/admin"
+              className="flex w-full items-center gap-2 px-4 py-2 text-sm text-white hover:bg-[#272C33]"
+            >
+              Admin Panel
+            </Link>
           )}
         </div>
       )}

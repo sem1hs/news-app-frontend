@@ -6,27 +6,35 @@ const protectedRoutes = ["/admin"];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const token = request.cookies.get("accessToken")?.value;
+
+  const accessToken = request.cookies.get("accessToken")?.value;
+  const refreshToken = request.cookies.get("refreshToken")?.value;
 
   const isProtectedRoute = protectedRoutes.some((route) =>
-    pathname.startsWith(route)
+    pathname.startsWith(route),
   );
 
   if (isProtectedRoute) {
-    if (!token) {
-      const baseUrl = new URL("/", request.url);
-      return NextResponse.redirect(baseUrl);
+    if (!accessToken && !refreshToken) {
+      return NextResponse.redirect(new URL("/", request.url));
     }
 
-    if (token && verifyJwt(token) === null) {
-      const baseUrl = new URL("/", request.url);
-      return NextResponse.redirect(baseUrl);
-    }
+    if (accessToken) {
+      const decoded = verifyJwt(accessToken);
 
-    const decoded = verifyJwt(token);
-    if (!decoded?.roles.some((role) => role === "ROLE_ADMIN")) {
-      const baseUrl = new URL("/", request.url);
-      return NextResponse.redirect(baseUrl);
+      if (!decoded) {
+        if (!refreshToken) {
+          return NextResponse.redirect(new URL("/", request.url));
+        }
+
+        return NextResponse.next();
+      }
+
+      const isAdmin = decoded.roles?.some((role) => role === "ROLE_ADMIN");
+
+      if (!isAdmin) {
+        return NextResponse.redirect(new URL("/", request.url));
+      }
     }
   }
 

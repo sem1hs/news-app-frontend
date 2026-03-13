@@ -8,9 +8,14 @@ export function useUser() {
     staleTime: 1000 * 60 * 15,
     retry: false,
     refetchOnWindowFocus: false,
+    refetchOnMount: true,
   });
 
   const user = getUser.data?.user ?? null;
 
-  return { user, loading: getUser.isLoading, status: getUser.status };
+  return {
+    user,
+    loading: getUser.isLoading || getUser.isFetching,
+    status: getUser.status,
+  };
 }

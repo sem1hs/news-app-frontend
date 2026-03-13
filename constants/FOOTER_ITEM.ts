@@ -15,19 +15,18 @@ export const FooterPageColumn: FooterColumn = {
     { label: "Futbol Haberleri", href: "/news" },
     { label: "Fikstür", href: "/fixtures" },
     { label: "Puan Durumu", href: "/standings" },
-    { label: "Hakkımızda", href: "/about" },
   ],
 };
 
 export const FooterLeaguesColumn: FooterColumn = {
   title: "Ligler",
   links: [
-    { label: "Süper Lig", href: "/" },
-    { label: "Premier League", href: "/" },
-    { label: "Serie A", href: "/" },
-    { label: "La Liga", href: "/" },
-    { label: "Bundesliga", href: "/" },
-    { label: "Ligue 1", href: "/" },
+    { label: "Süper Lig", href: "/standings" },
+    { label: "Premier League", href: "/standings" },
+    { label: "Serie A", href: "/standings" },
+    { label: "La Liga", href: "/standings" },
+    { label: "Bundesliga", href: "/standings" },
+    { label: "Ligue 1", href: "/standings" },
   ],
 };
 

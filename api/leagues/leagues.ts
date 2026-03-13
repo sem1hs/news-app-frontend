@@ -1,7 +1,12 @@
-import { CreateLeagueRequest, LeagueResponse, UpdateLeagueRequest } from "@/types/league";
+import { fetchWithAuth } from "@/lib/fetchWithAuth";
+import {
+  CreateLeagueRequest,
+  LeagueResponse,
+  UpdateLeagueRequest,
+} from "@/types/league";
 
 export async function fetchLeagues(): Promise<LeagueResponse[]> {
-  const res = await fetch("/api/leagues", {
+  const res = await fetchWithAuth("/api/leagues", {
     method: "GET",
     credentials: "include",
   });
@@ -14,9 +19,9 @@ export async function fetchLeagues(): Promise<LeagueResponse[]> {
 }
 
 export async function createLeague(
-  league: CreateLeagueRequest
+  league: CreateLeagueRequest,
 ): Promise<LeagueResponse> {
-  const res = await fetch("/api/leagues", {
+  const res = await fetchWithAuth("/api/leagues", {
     method: "POST",
     credentials: "include",
     body: JSON.stringify(league),
@@ -30,9 +35,9 @@ export async function createLeague(
 }
 
 export async function updateLeague(
-  league: UpdateLeagueRequest
+  league: UpdateLeagueRequest,
 ): Promise<LeagueResponse> {
-  const res = await fetch(`/api/leagues/${league.id}`, {
+  const res = await fetchWithAuth(`/api/leagues/${league.id}`, {
     method: "PATCH",
     credentials: "include",
     body: JSON.stringify(league),
@@ -46,7 +51,7 @@ export async function updateLeague(
 }
 
 export async function deleteLeague(leagueId: number): Promise<void> {
-  const res = await fetch(`/api/leagues/${leagueId}`, {
+  const res = await fetchWithAuth(`/api/leagues/${leagueId}`, {
     method: "DELETE",
     credentials: "include",
   });

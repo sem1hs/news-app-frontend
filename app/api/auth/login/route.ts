@@ -18,7 +18,7 @@ export async function POST(req: Request) {
   if (tokens.error) {
     return NextResponse.json(
       { message: "Tokenlar Çekilemedi" },
-      { status: 403 }
+      { status: 403 },
     );
   }
 

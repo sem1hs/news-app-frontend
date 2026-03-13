@@ -1,64 +1,79 @@
-import { StandingCreateRequest, StandingResponse, StandingUpdateRequest } from "@/types/standing";
+import { fetchWithAuth } from "@/lib/fetchWithAuth";
+import {
+  StandingCreateRequest,
+  StandingResponse,
+  StandingUpdateRequest,
+} from "@/types/standing";
 
-export async function fetchStandingsByLeagueId(leagueId: number): Promise<StandingResponse[]> {
-    const params = new URLSearchParams();
+export async function fetchStandingsByLeagueId(
+  leagueId: number,
+): Promise<StandingResponse[]> {
+  const params = new URLSearchParams();
 
-    params.append("leagueId", leagueId.toString());
+  params.append("leagueId", leagueId.toString());
 
-    const res = await fetch(`/api/standings?${params.toString()}`, {
-        method: "GET",
-        credentials: "include",
-    });
+  const res = await fetchWithAuth(`/api/standings?${params.toString()}`, {
+    method: "GET",
+    credentials: "include",
+  });
 
-    if (!res.ok) {
-        throw new Error("Puan durumu getirilemedi");
-    }
+  if (!res.ok) {
+    throw new Error("Puan durumu getirilemedi");
+  }
 
-    return res.json();
+  return res.json();
 }
 
 export async function createStanding(
-    standing: StandingCreateRequest
+  standing: StandingCreateRequest,
 ): Promise<StandingResponse> {
-    const res = await fetch("/api/standings", {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify(standing),
-    });
+  const res = await fetchWithAuth("/api/standings", {
+    method: "POST",
+    credentials: "include",
+    body: JSON.stringify(standing),
+  });
 
-    if (!res.ok) {
-        throw new Error("Puan Durumu Oluşturulamadı");
-    }
+  if (!res.ok) {
+    throw new Error("Puan Durumu Oluşturulamadı");
+  }
 
-    return res.json();
+  return res.json();
 }
 
 export async function updateStanding(
-    standing: StandingUpdateRequest
+  standing: StandingUpdateRequest,
 ): Promise<StandingResponse> {
-    const res = await fetch(`/api/standings/${standing.leagueId}/${standing.teamId}`, {
-        method: "PATCH",
-        credentials: "include",
-        body: JSON.stringify(standing),
-    });
+  const res = await fetchWithAuth(
+    `/api/standings/${standing.leagueId}/${standing.teamId}`,
+    {
+      method: "PATCH",
+      credentials: "include",
+      body: JSON.stringify(standing),
+    },
+  );
 
-    if (!res.ok) {
-        throw new Error("Puan Durumu Güncellenemedi");
-    }
+  if (!res.ok) {
+    throw new Error("Puan Durumu Güncellenemedi");
+  }
 
-    return res.json();
+  return res.json();
 }
 
+export async function deleteStanding({
+  leagueId,
+  teamId,
+}: {
+  leagueId: number;
+  teamId: number;
+}): Promise<void> {
+  const res = await fetchWithAuth(`/api/standings/${leagueId}/${teamId}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
 
-export async function deleteStanding({ leagueId, teamId }: { leagueId: number, teamId: number }): Promise<void> {
-    const res = await fetch(`/api/standings/${leagueId}/${teamId}`, {
-        method: "DELETE",
-        credentials: "include",
-    });
+  if (!res.ok) {
+    throw new Error("Puan Durumu Silinemedi");
+  }
 
-    if (!res.ok) {
-        throw new Error("Puan Durumu Silinemedi");
-    }
-
-    return res.json();
+  return res.json();
 }

@@ -1,3 +1,4 @@
+import { fetchWithAuth } from "@/lib/fetchWithAuth";
 import {
   FetchNewsParams,
   FetchNewsParamsBySearch,
@@ -17,7 +18,7 @@ export async function fetchNews({
   params.append("page", page.toString());
   params.append("size", size.toString());
 
-  const res = await fetch(`/api/news?${params.toString()}`, {
+  const res = await fetchWithAuth(`/api/news?${params.toString()}`, {
     method: "GET",
     credentials: "include",
   });
@@ -30,7 +31,7 @@ export async function fetchNews({
 }
 
 export async function fetchNewsBySlug(slug: string): Promise<NewsResponse> {
-  const res = await fetch(`/api/news/slug/${slug}`, {
+  const res = await fetchWithAuth(`/api/news/slug/${slug}`, {
     method: "GET",
     credentials: "include",
   });
@@ -53,7 +54,7 @@ export async function fetchNewsByLeagueName({
   params.append("page", page.toString());
   params.append("size", size.toString());
 
-  const res = await fetch(`/api/news?${params.toString()}`, {
+  const res = await fetchWithAuth(`/api/news?${params.toString()}`, {
     method: "GET",
     credentials: "include",
   });
@@ -66,7 +67,7 @@ export async function fetchNewsByLeagueName({
 }
 
 export async function fetchBreakingNews(): Promise<NewsResponse[]> {
-  const res = await fetch("/api/news/breaking", {
+  const res = await fetchWithAuth("/api/news/breaking", {
     method: "GET",
     credentials: "include",
   });
@@ -78,11 +79,13 @@ export async function fetchBreakingNews(): Promise<NewsResponse[]> {
   return res.json();
 }
 
-export async function fetchPopularNews(dayRange: number): Promise<NewsResponse[]> {
+export async function fetchPopularNews(
+  dayRange: number,
+): Promise<NewsResponse[]> {
   const params = new URLSearchParams();
   params.append("dayRange", dayRange.toString());
 
-  const res = await fetch(`/api/news/popular?${params.toString()}`, {
+  const res = await fetchWithAuth(`/api/news/popular?${params.toString()}`, {
     method: "GET",
     credentials: "include",
   });
@@ -94,11 +97,13 @@ export async function fetchPopularNews(dayRange: number): Promise<NewsResponse[]
   return res.json();
 }
 
-export async function fetchLatestNewsByCategory(category: NewsCategory): Promise<NewsResponse[]> {
+export async function fetchLatestNewsByCategory(
+  category: NewsCategory,
+): Promise<NewsResponse[]> {
   const params = new URLSearchParams();
   params.append("category", category.toString());
 
-  const res = await fetch(`/api/news/latest?${params.toString()}`, {
+  const res = await fetchWithAuth(`/api/news/latest?${params.toString()}`, {
     method: "GET",
     credentials: "include",
   });
@@ -121,7 +126,7 @@ export async function fetchNewsBySearchQuery({
   params.append("page", page.toString());
   params.append("size", size.toString());
 
-  const res = await fetch(`/api/news/search?${params.toString()}`, {
+  const res = await fetchWithAuth(`/api/news/search?${params.toString()}`, {
     method: "GET",
     credentials: "include",
   });
@@ -133,11 +138,10 @@ export async function fetchNewsBySearchQuery({
   return res.json();
 }
 
-
 export async function createNews(
-  news: NewsCreateRequest
+  news: NewsCreateRequest,
 ): Promise<NewsResponse> {
-  const res = await fetch("/api/news", {
+  const res = await fetchWithAuth("/api/news", {
     method: "POST",
     credentials: "include",
     body: JSON.stringify(news),
@@ -151,9 +155,9 @@ export async function createNews(
 }
 
 export async function updateNews(
-  news: UpdateNewsRequest
+  news: UpdateNewsRequest,
 ): Promise<NewsResponse> {
-  const res = await fetch(`/api/news/${news.id}`, {
+  const res = await fetchWithAuth(`/api/news/${news.id}`, {
     method: "PATCH",
     credentials: "include",
     body: JSON.stringify(news),
@@ -167,7 +171,7 @@ export async function updateNews(
 }
 
 export async function deleteNews(id: number): Promise<void> {
-  const res = await fetch(`/api/news/${id}`, {
+  const res = await fetchWithAuth(`/api/news/${id}`, {
     method: "DELETE",
     credentials: "include",
   });

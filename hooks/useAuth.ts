@@ -1,9 +1,11 @@
 import { LoginRequest, SignUpRequest } from "@/types/auth";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { login, logout, signUp } from "@/api/auth/auth";
+import { useUser } from "./useUser";
 
 export const useAuth = () => {
   const queryClient = useQueryClient();
+  const { user } = useUser();
 
   const loginMutation = useMutation({
     mutationFn: async ({
@@ -43,12 +45,12 @@ export const useAuth = () => {
     },
   });
 
-  const loginFn = async (payload: { user: SignUpRequest }) => {
+  const loginFn = async (payload: { user: LoginRequest }) => {
     const data = await loginMutation.mutateAsync(payload);
     return data;
   };
 
-  const signUpFn = async (payload: { user: LoginRequest }) => {
+  const signUpFn = async (payload: { user: SignUpRequest }) => {
     const data = await signUpMutation.mutateAsync(payload);
     return data;
   };
@@ -57,6 +59,6 @@ export const useAuth = () => {
     loginFn,
     signUpFn,
     logoutFn: logoutMutation.mutate,
-    user: loginMutation.data,
+    user,
   };
 };
