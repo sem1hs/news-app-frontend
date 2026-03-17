@@ -48,7 +48,7 @@ const News = () => {
         />
       </div>
 
-      <div className="prose prose-sm sm:prose-base prose-invert max-w-none text-gray-300 leading-relaxed">
+      <div className="prose prose-sm sm:prose-base prose-invert max-w-none text-gray-300 leading-relaxed whitespace-pre-line">
         {news.content}
       </div>
     </article>
