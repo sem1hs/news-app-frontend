@@ -1,20 +1,21 @@
-import type { FooterLink } from "@/constants/FOOTER_ITEM";
+import type { FooterLink as FooterLinkType } from "@/constants/FOOTER_ITEM";
 import Link from "next/link";
 
 type Props = {
-  footerLink: FooterLink;
+  footerLink: FooterLinkType;
 };
+
 const FooterLink = ({ footerLink }: Props) => {
+  const href = footerLink.query
+    ? {
+        pathname: footerLink.href,
+        query: { league: footerLink.query },
+      }
+    : footerLink.href;
+
   return (
     <li className="text-sm text-zinc-400 hover:text-white transition">
-      <Link
-        href={{
-          pathname: footerLink.href,
-          query: { league: footerLink.label },
-        }}
-      >
-        {footerLink.label}
-      </Link>
+      <Link href={href}>{footerLink.label}</Link>
     </li>
   );
 };

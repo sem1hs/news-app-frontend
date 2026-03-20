@@ -15,7 +15,7 @@ const AuthClient = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const isAuthenticated = !!user;
-  const isAdmin = user?.roles?.includes("ROLE_ADMIN");
+  const isAdmin = user?.role?.includes("ROLE_ADMIN");
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {

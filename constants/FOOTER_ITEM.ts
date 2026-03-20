@@ -6,6 +6,7 @@ export type FooterColumn = {
 export type FooterLink = {
   label: string;
   href: string;
+  query?: string;
 };
 
 export const FooterPageColumn: FooterColumn = {
@@ -21,12 +22,12 @@ export const FooterPageColumn: FooterColumn = {
 export const FooterLeaguesColumn: FooterColumn = {
   title: "Ligler",
   links: [
-    { label: "Süper Lig", href: "/standings" },
-    { label: "Premier League", href: "/standings" },
-    { label: "Serie A", href: "/standings" },
-    { label: "La Liga", href: "/standings" },
-    { label: "Bundesliga", href: "/standings" },
-    { label: "Ligue 1", href: "/standings" },
+    { label: "Süper Lig", href: "/standings", query: "Süper Lig" },
+    { label: "Premier League", href: "/standings", query: "Premier League" },
+    { label: "Serie A", href: "/standings", query: "Serie A" },
+    { label: "La Liga", href: "/standings", query: "La Liga" },
+    { label: "Bundesliga", href: "/standings", query: "Bundesliga" },
+    { label: "Ligue 1", href: "/standings", query: "Ligue 1" },
   ],
 };
 
