@@ -7,15 +7,21 @@ import useLatestNews from "@/hooks/useLatestNews";
 import { NewsCategory } from "@/types/news";
 import FeaturedNewsCardSkeleton from "./FeaturedNewsCardSkeleton";
 import NotFound from "@/components/NotFound/NotFound";
-import { TABS } from "@/constants/LATEST_NEWS"
-
+import { TABS } from "@/constants/LATEST_NEWS";
 
 export default function LatestNews() {
-  const [activeTab, setActiveTab] = useState<NewsCategory>(NewsCategory.SUPER_LIG);
-  const { latestNews, isLoading, isError } = useLatestNews(activeTab)
+  const [activeTab, setActiveTab] = useState<NewsCategory>(
+    NewsCategory.SUPER_LIG,
+  );
+  const { latestNews, isLoading, isError } = useLatestNews(activeTab);
 
-  if (isLoading) return <><FeaturedNewsCardSkeleton /></>
-  if (latestNews === undefined || isError) return <NotFound />
+  if (isLoading)
+    return (
+      <>
+        <FeaturedNewsCardSkeleton />
+      </>
+    );
+  if (latestNews === undefined || isError) return <NotFound />;
 
   const currentNews = latestNews ?? [];
   const featured = currentNews[0];
@@ -27,12 +33,17 @@ export default function LatestNews() {
         <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <h2 className="text-2xl font-bold text-white">Son Haberler</h2>
 
-          <div className="flex gap-4 text-sm">
+          <div className="grid grid-cols-3 gap-2 text-sm md:flex md:gap-4">
             {TABS.map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key as NewsCategory)}
-                className={`pb-1 text-white  transition cursor-pointer ${activeTab === tab.key ? "border-b-2 border-primary font-semibold text-primary" : ""}`}>
+                className={`pb-1 text-white transition cursor-pointer text-center ${
+                  activeTab === tab.key
+                    ? "border-b-2 border-primary font-semibold text-primary"
+                    : ""
+                }`}
+              >
                 {tab.label}
               </button>
             ))}

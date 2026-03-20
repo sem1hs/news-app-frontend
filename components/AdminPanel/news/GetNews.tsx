@@ -12,7 +12,7 @@ const GetNews = () => {
       e.preventDefault();
       setVisible(true);
     },
-    []
+    [],
   );
 
   return (
@@ -24,7 +24,11 @@ const GetNews = () => {
         {isLoading ? "Yükleniyor..." : "Haberleri Getir"}
       </button>
 
-      {visible && news && <NewsTable data={news?.content} />}
+      {visible && news && (
+        <div className="mt-4 max-h-[600px] overflow-y-auto custom-scrollbar">
+          <NewsTable data={news?.content} />
+        </div>
+      )}
     </>
   );
 };

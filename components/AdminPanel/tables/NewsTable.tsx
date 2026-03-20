@@ -16,7 +16,7 @@ export default function NewsTable({ data }: { data: NewsResponse[] }) {
       if (!confirmed) return;
       deleteNews(newsId);
     },
-    [deleteNews]
+    [deleteNews],
   );
 
   const handleUpdate = useCallback((news: NewsResponse) => {
@@ -79,8 +79,10 @@ export default function NewsTable({ data }: { data: NewsResponse[] }) {
                   {news.spot}
                 </td>
 
-                <td className="p-2 border border-amber-500 text-center">
-                  {news.content}
+                <td className="p-2 border border-amber-500">
+                  <div className="max-w-[250px] overflow-x-auto whitespace-nowrap custom-scrollbar">
+                    {news.content}
+                  </div>
                 </td>
 
                 <td className="p-2 border border-amber-500">{news.imageUrl}</td>

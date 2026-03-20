@@ -33,13 +33,13 @@ export default function NewsCarouselItem({
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
       <div className="absolute bottom-0 p-6 text-white">
-        <span className="mb-2 inline-block rounded bg-amber-500 px-2 py-1 text-xs font-semibold text-black">
+        <span className="mb-2 inline-block rounded bg-amber-500 px-2 py-1 text-[10px] md:text-xs font-semibold text-black">
           {category}
         </span>
 
-        <h2 className="text-2xl font-bold leading-tight">{title}</h2>
+        <h2 className="text-lg md:text-2xl font-bold leading-tight">{title}</h2>
 
-        <p className="mt-2 text-sm text-white/80">{date}</p>
+        <p className="mt-2 text-xs md:text-sm text-white/80">{date}</p>
       </div>
     </Link>
   );
