@@ -42,6 +42,10 @@ export const getLeagueIdByLabel = (label: string): number | undefined => {
   return LEAGUES.find((league) => league.name === label)?.id;
 };
 
+export const getMaxWeekByLeagueId = (leagueId: number): number => {
+  return LEAGUES.find((league) => league.id === leagueId)?.maxWeek as number;
+};
+
 export const formatCategoryName = (category: NewsCategory): string | undefined => {
   return TABS.find(tabs => tabs.key === category)?.label
 }

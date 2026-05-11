@@ -23,13 +23,14 @@ export type League = {
   name: string;
   country: string;
   logoUrl?: string;
+  maxWeek?: number;
 };
 
 export const LEAGUES: League[] = [
-  { id: 1, name: "Premier League", country: "England" },
-  { id: 3, name: "Serie A", country: "Italy" },
-  { id: 4, name: "Bundesliga", country: "Germany" },
-  { id: 5, name: "Ligue 1", country: "France" },
-  { id: 6, name: "Süper Lig", country: "Türkiye" },
-  { id: 7, name: "La Liga", country: "Spain" },
+  { id: 10, name: "Premier League", country: "England", maxWeek: 38 },
+  { id: 13, name: "Serie A", country: "Italy", maxWeek: 38 },
+  { id: 11, name: "Bundesliga", country: "Germany", maxWeek: 34 },
+  { id: 12, name: "Ligue 1", country: "France", maxWeek: 34 },
+  { id: 9, name: "Süper Lig", country: "Türkiye", maxWeek: 34 },
+  { id: 14, name: "La Liga", country: "Spain", maxWeek: 38 },
 ];

@@ -1,7 +1,7 @@
 "use client";
 
 import useFixtureByLeagueAndWeek from "@/hooks/useFixtureByLeagueAndWeek";
-import { getLeagueIdByLabel } from "@/lib/helper";
+import { getLeagueIdByLabel, getMaxWeekByLeagueId } from "@/lib/helper";
 import FixtureCard from "./FixtureCard";
 import { useState } from "react";
 import WeekSelect from "./WeekSelect";
@@ -14,6 +14,7 @@ type Props = {
 
 const FixtureLeague = ({ leagueName }: Props) => {
   const leagueId = getLeagueIdByLabel(leagueName as string);
+  const getMaxWeek = getMaxWeekByLeagueId(leagueId as number);
   const [week, setWeek] = useState<number>(26);
 
   const { fixture: fixtures, isLoading } = useFixtureByLeagueAndWeek({
@@ -29,7 +30,7 @@ const FixtureLeague = ({ leagueName }: Props) => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <h2 className="text-lg font-semibold text-gray-300">{leagueName}</h2>
 
-        <WeekSelect value={week} onChange={setWeek} />
+        <WeekSelect value={week} onChange={setWeek} maxWeek={getMaxWeek} />
       </div>
 
       {!isLoading &&
