@@ -10,7 +10,7 @@ import { TeamTableSkeleton } from "../skeleton/TeamTableSkeleton";
 const GetTeamByLeague = () => {
   const { leagues } = useLeagues();
   const [visible, setVisible] = useState<boolean>(false);
-  const [leagueId, setLeagueId] = useState<number>(6);
+  const [leagueId, setLeagueId] = useState<number>(9);
   const { teams, isLoading } = useTeams({ leagueId });
 
   const handleClick = useCallback(

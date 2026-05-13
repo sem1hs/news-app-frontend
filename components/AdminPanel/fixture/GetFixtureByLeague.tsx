@@ -11,7 +11,7 @@ import EmptyState from "../skeleton/EmptyState";
 const GetFixtureByLeague = () => {
   const { leagues } = useLeagues();
   const [visible, setVisible] = useState<boolean>(false);
-  const [leagueId, setLeagueId] = useState<number>(6);
+  const [leagueId, setLeagueId] = useState<number>(9);
   const { fixture, isLoading } = useFixtureByLeague({ leagueId });
 
   const groupedData = useMemo(() => {

@@ -11,7 +11,7 @@ import StandingSkeleton from "@/components/Standings/StandingSkeleton";
 const GetStanding = () => {
   const { leagues } = useLeagues();
   const [visible, setVisible] = useState<boolean>(false);
-  const [leagueId, setLeagueId] = useState<number>(6);
+  const [leagueId, setLeagueId] = useState<number>(9);
   const { standings, isLoading } = useStandingsByLeagueId(leagueId);
 
   const handleClick = useCallback(
