@@ -4,6 +4,8 @@ import { User } from "@/types/user";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
+const BASE_URL = process.env.API_BASE_URL || "http://localhost:9000";
+
 export async function POST(request: NextRequest) {
   console.log("Refresh token çalıştı");
   try {
@@ -18,7 +20,7 @@ export async function POST(request: NextRequest) {
     }
 
     const backendResponse = await fetch(
-      `http://localhost:9000/api/v1/auth/refresh-token`,
+      `${BASE_URL}/auth/refresh-token`,
       {
         method: "POST",
         headers: {
