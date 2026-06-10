@@ -36,7 +36,12 @@ const UpdateNewsForm = ({ news, onClose }: Props) => {
   return (
     <div className="overflow-x-auto px-6 mt-6 w-full">
       <Formik
-        initialValues={{ ...news, tags: news.tags?.join(", ") || "" }}
+        initialValues={{
+          ...news,
+          tags: Array.isArray(news.tags)
+            ? news.tags.join(", ")
+            : news.tags || "",
+        }}
         validationSchema={newsUpdateSchema}
         onSubmit={handleSubmit}
       >

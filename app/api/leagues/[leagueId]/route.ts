@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 const BASE_URL = process.env.API_BASE_URL || "http://localhost:9000";
 
 type Params = {
-    leagueId: number;
+    leagueId: string;
 };
 
 export async function PATCH(
