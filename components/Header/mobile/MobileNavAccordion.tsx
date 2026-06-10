@@ -14,7 +14,7 @@ const MobileNavAccordion = ({ mobileNavItem, handleClick }: Props) => {
           <Link
             href={{
               pathname: item.href,
-              query: { league: item.label },
+              query: { league: item.query },
             }}
             className="block py-2 text-zinc-400 hover:text-white transition"
             onClick={handleClick}

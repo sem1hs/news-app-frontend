@@ -9,7 +9,7 @@ const DropdownItem = ({ dropdownItem }: Props) => {
     <Link
       href={{
         pathname: dropdownItem.href,
-        query: { league: dropdownItem.label },
+        query: { league: dropdownItem.query },
       }}
       className="w-full block"
     >

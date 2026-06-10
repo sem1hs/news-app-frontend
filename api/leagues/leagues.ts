@@ -18,6 +18,21 @@ export async function fetchLeagues(): Promise<LeagueResponse[]> {
   return res.json();
 }
 
+export async function fetchLeagueByName(
+  leagueName: string
+): Promise<LeagueResponse> {
+  const res = await fetchWithAuth(`/api/leagues/name/${leagueName}`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    throw new Error("Lig getirilemedi");
+  }
+
+  return res.json();
+}
+
 export async function createLeague(
   league: CreateLeagueRequest,
 ): Promise<LeagueResponse> {

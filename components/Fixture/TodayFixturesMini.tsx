@@ -16,44 +16,46 @@ const TodayFixturesMini = () => {
     let shownCount = 0;
 
     return (
-        <section className="w-full py-6">
-            <div className="container mx-auto px-4">
-                <div className="bg-[#111517] border border-white/5 rounded-lg text-white p-4">
+        <>
+            {data && Object.keys(data).length > 0 && <section className="w-full py-6">
+                <div className="container mx-auto px-4">
+                    <div className="bg-[#111517] border border-white/5 rounded-lg text-white p-4">
 
-                    <h2 className="text-base sm:text-lg font-semibold text-gray-200 mb-3">
-                        Bugünün Maçları
-                    </h2>
+                        <h2 className="text-base sm:text-lg font-semibold text-gray-200 mb-3">
+                            Bugünün Maçları
+                        </h2>
 
-                    <div className="space-y-4 max-h-[340px] overflow-y-auto pr-1 mask-fade scrollbar-mini">
-                        {Object.entries(data).map(([leagueName, fixtures]) => {
-                            if (shownCount >= MAX_MATCH) return null;
+                        <div className="space-y-4 max-h-[340px] overflow-y-auto pr-1 mask-fade scrollbar-mini">
+                            {Object.entries(data).map(([leagueName, fixtures]) => {
+                                if (shownCount >= MAX_MATCH) return null;
 
-                            const leagueFixtures: FixtureResponse[] = fixtures.slice(
-                                0,
-                                MAX_MATCH - shownCount
-                            );
+                                const leagueFixtures: FixtureResponse[] = fixtures.slice(
+                                    0,
+                                    MAX_MATCH - shownCount
+                                );
 
-                            shownCount += leagueFixtures.length;
+                                shownCount += leagueFixtures.length;
 
-                            return (
-                                <div key={leagueName} className="space-y-2">
-                                    <div className="text-xs font-semibold text-gray-400">
-                                        {leagueName}
+                                return (
+                                    <div key={leagueName} className="space-y-2">
+                                        <div className="text-xs font-semibold text-gray-400">
+                                            {leagueName}
+                                        </div>
+
+                                        {leagueFixtures.map((fixture) => (
+                                            <TodayFixtureMiniItem
+                                                key={fixture.id}
+                                                fixture={fixture}
+                                            />
+                                        ))}
                                     </div>
-
-                                    {leagueFixtures.map((fixture) => (
-                                        <TodayFixtureMiniItem
-                                            key={fixture.id}
-                                            fixture={fixture}
-                                        />
-                                    ))}
-                                </div>
-                            );
-                        })}
+                                );
+                            })}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>}
+        </>
     );
 };
 

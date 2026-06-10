@@ -1,21 +1,27 @@
 "use client";
 import useFixtureByLeagueAndWeek from "@/hooks/useFixtureByLeagueAndWeek";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import FixtureSkeleton from "../skeleton/FixtureSkeleton";
 import LeagueAndWeekSelect from "./LeagueAndWeekSelect";
 import { useLeagues } from "@/hooks/useLeagues";
 import FixtureTable from "../tables/FixtureTable";
 import EmptyState from "../skeleton/EmptyState";
+import { getMaxWeekByLeagueId } from "@/lib/helper";
 
 const GetFixtureByLeagueAndWeek = () => {
   const { leagues } = useLeagues();
   const [visible, setVisible] = useState<boolean>(false);
   const [leagueId, setLeagueId] = useState<number>(9);
-  const [week, setWeek] = useState<number>(1);
+  const maxWeek = leagueId ? getMaxWeekByLeagueId(leagueId) : 0;
+  const [week, setWeek] = useState<number>(maxWeek);
   const { fixture, isLoading } = useFixtureByLeagueAndWeek({
     leagueId: leagueId,
     week: week,
   });
+
+  useEffect(() => {
+    setWeek(maxWeek);
+  }, [maxWeek]);
 
   const handleClick = useCallback(
     async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -41,6 +47,7 @@ const GetFixtureByLeagueAndWeek = () => {
           setLeagueId={setLeagueId}
           week={week}
           setWeek={setWeek}
+          maxWeek={maxWeek}
           leagues={leagues}
         />
       )}

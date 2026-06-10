@@ -28,6 +28,7 @@ export const FooterLeaguesColumn: FooterColumn = {
     { label: "La Liga", href: "/standings", query: "La Liga" },
     { label: "Bundesliga", href: "/standings", query: "Bundesliga" },
     { label: "Ligue 1", href: "/standings", query: "Ligue 1" },
+    { label: "Dünya Kupası", href: "/standings", query: "World Cup" },
   ],
 };
 
