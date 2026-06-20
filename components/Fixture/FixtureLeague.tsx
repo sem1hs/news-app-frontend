@@ -1,7 +1,11 @@
 "use client";
 
 import useFixtureByLeagueAndWeek from "@/hooks/useFixtureByLeagueAndWeek";
-import { getLeagueIdByLabel, getMaxWeekByLeagueId } from "@/lib/helper";
+import {
+  getCurrentWeekByLeagueId,
+  getLeagueIdByLabel,
+  getMaxWeekByLeagueId,
+} from "@/lib/helper";
 import { useEffect, useState } from "react";
 import WeekSelect from "./WeekSelect";
 import FixtureCardSkeleton from "./FixtureCardSkeleton";
@@ -18,10 +22,11 @@ type Props = {
 const FixtureLeague = ({ leagueName }: Props) => {
   const leagueId = getLeagueIdByLabel(leagueName as string);
   const maxWeek = leagueId ? getMaxWeekByLeagueId(leagueId) : 0;
-  const [week, setWeek] = useState<number>(maxWeek);
+  const currentWeek = leagueId ? getCurrentWeekByLeagueId(leagueId) : 0;
+  const [week, setWeek] = useState<number>(currentWeek);
 
   const { league, isLoading: isLeagueLoading } = useLeagueByName(
-    leagueName as string
+    leagueName as string,
   );
 
   const { fixture: fixtures, isLoading } = useFixtureByLeagueAndWeek({
@@ -30,8 +35,8 @@ const FixtureLeague = ({ leagueName }: Props) => {
   });
 
   useEffect(() => {
-    setWeek(maxWeek);
-  }, [maxWeek]);
+    setWeek(currentWeek);
+  }, [currentWeek]);
 
   if (isLoading) return <FixtureCardSkeleton />;
   if (!fixtures) return <NotFound />;
@@ -52,26 +57,17 @@ const FixtureLeague = ({ leagueName }: Props) => {
             />
           )}
 
-          <h2 className="text-lg font-semibold text-gray-300">
-            {leagueName}
-          </h2>
+          <h2 className="text-lg font-semibold text-gray-300">{leagueName}</h2>
         </div>
 
-        <WeekSelect
-          value={week}
-          onChange={setWeek}
-          maxWeek={maxWeek}
-        />
+        <WeekSelect value={week} onChange={setWeek} maxWeek={maxWeek} />
       </div>
 
       {isWorldCup ? (
         <GroupFixtureList fixtures={fixtures} />
       ) : (
         fixtures.map((fixture) => (
-          <FixtureCard
-            key={fixture.id}
-            fixture={fixture}
-          />
+          <FixtureCard key={fixture.id} fixture={fixture} />
         ))
       )}
     </div>

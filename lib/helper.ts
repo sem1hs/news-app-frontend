@@ -49,9 +49,16 @@ export const getMaxWeekByLeagueId = (leagueId: number): number => {
   return LEAGUES.find((league) => league.id === leagueId)?.maxWeek as number;
 };
 
-export const formatCategoryName = (category: NewsCategory): string | undefined => {
-  return TABS.find(tabs => tabs.key === category)?.label
-}
+export const getCurrentWeekByLeagueId = (leagueId: number): number => {
+  return LEAGUES.find((league) => league.id === leagueId)
+    ?.currentWeek as number;
+};
+
+export const formatCategoryName = (
+  category: NewsCategory,
+): string | undefined => {
+  return TABS.find((tabs) => tabs.key === category)?.label;
+};
 
 export type FixtureGroup = {
   groupName: string;
@@ -59,27 +66,22 @@ export type FixtureGroup = {
 };
 
 export const groupWorldCupFixtures = (
-  fixtures: FixtureResponse[]
+  fixtures: FixtureResponse[],
 ): FixtureGroup[] => {
-  return Array.from(
-    { length: Math.ceil(fixtures.length / 2) },
-    (_, index) => ({
-      groupName: String.fromCharCode(65 + index),
-      fixtures: fixtures.slice(index * 2, index * 2 + 2),
-    })
-  );
+  return Array.from({ length: Math.ceil(fixtures.length / 2) }, (_, index) => ({
+    groupName: String.fromCharCode(65 + index),
+    fixtures: fixtures.slice(index * 2, index * 2 + 2),
+  }));
 };
 
-export const groupFixturesByWorldCupGroup = (
-  fixtures: FixtureResponse[]
-) => {
+export const groupFixturesByWorldCupGroup = (fixtures: FixtureResponse[]) => {
   const grouped: Record<string, FixtureResponse[]> = {};
 
   fixtures.forEach((fixture) => {
     const groupName = Object.entries(WORLD_CUP_GROUPS).find(
       ([_, teams]) =>
         teams.includes(fixture.homeTeamName) ||
-        teams.includes(fixture.awayTeamName)
+        teams.includes(fixture.awayTeamName),
     )?.[0];
 
     if (!groupName) return;
@@ -100,13 +102,13 @@ export type StandingGroup = {
 };
 
 export const groupStandingsByWorldCupGroup = (
-  standings: StandingResponse[]
+  standings: StandingResponse[],
 ): StandingGroup[] => {
   return Object.keys(WORLD_CUP_GROUPS)
     .map((groupName) => ({
       groupName,
       standings: standings.filter((standing) =>
-        WORLD_CUP_GROUPS[groupName].includes(standing.teamName)
+        WORLD_CUP_GROUPS[groupName].includes(standing.teamName),
       ),
     }))
     .filter((group) => group.standings.length > 0);
