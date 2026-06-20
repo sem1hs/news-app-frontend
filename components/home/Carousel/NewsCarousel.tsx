@@ -15,6 +15,7 @@ const CATEGORY_LABELS: Record<string, string> = {
   BUNDESLIGA: "Bundesliga",
   SERIE_A: "Serie A",
   LIGUE_1: "Ligue 1",
+  WORLD_CUP: "Dünya Kupası",
 };
 
 export default function NewsCarousel() {
