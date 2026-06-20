@@ -5,13 +5,14 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   output: "standalone",
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'media.api-sports.io',
-        port: '',
-        pathname: '/football/**',
-        search: '',
+        protocol: "https",
+        hostname: "media.api-sports.io",
+        port: "",
+        pathname: "/football/**",
+        search: "",
       },
     ],
   },
