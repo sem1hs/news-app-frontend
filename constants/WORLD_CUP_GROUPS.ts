@@ -1,25 +1,25 @@
 export const WORLD_CUP_GROUPS: Record<string, string[]> = {
-    A: ["Mexico", "South Africa", "South Korea", "Czech Republic"],
+  A: ["Meksika", "Güney Afrika", "Güney Kore", "Çekya"],
 
-    B: ["Canada", "Qatar", "Bosnia & Herzegovina", "Switzerland"],
+  B: ["Kanada", "Katar", "Bosna Hersek", "İsviçre"],
 
-    C: ["Brazil", "Morocco", "Haiti", "Scotland"],
+  C: ["Brezilya", "Fas", "Haiti", "İskoçya"],
 
-    D: ["USA", "Paraguay", "Australia", "Türkiye"],
+  D: ["ABD", "Paraguay", "Avustralya", "Türkiye"],
 
-    E: ["Germany", "Curaçao", "Ivory Coast", "Ecuador"],
+  E: ["Almanya", "Curaçao", "Fildişi Sahili", "Ekvador"],
 
-    F: ["Netherlands", "Japan", "Sweden", "Tunisia"],
+  F: ["Hollanda", "Japonya", "İsveç", "Tunus"],
 
-    G: ["Belgium", "Egypt", "Iran", "New Zealand"],
+  G: ["Belçika", "Mısır", "İran", "Yeni Zelanda"],
 
-    H: ["Spain", "Cape Verde Islands", "Saudi Arabia", "Uruguay"],
+  H: ["İspanya", "Yeşil Burun Adaları", "Suudi Arabistan", "Uruguay"],
 
-    I: ["France", "Senegal", "Iraq", "Norway"],
+  I: ["Fransa", "Senegal", "Irak", "Norveç"],
 
-    J: ["Argentina", "Algeria", "Austria", "Jordan"],
+  J: ["Arjantin", "Cezayir", "Avusturya", "Ürdün"],
 
-    K: ["Portugal", "Uzbekistan", "Colombia", "Congo DR"],
+  K: ["Portekiz", "Özbekistan", "Kolombiya", "Kongo Demokratik Cumhuriyeti"],
 
-    L: ["England", "Croatia", "Ghana", "Panama"],
+  L: ["İngiltere", "Hırvatistan", "Gana", "Panama"],
 };
